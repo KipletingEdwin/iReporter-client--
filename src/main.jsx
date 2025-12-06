@@ -17,21 +17,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Router>
       <Layout>
         <Routes>
-          {/* Public routes */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-
-          {/* Private routes */}
-          <Route
-            path="/reports"
-            element={user ? <ReportsPage /> : <Navigate to="/login" replace />}
-          />
-          <Route
-            path="/admin"
-            element={user && user.admin ? <AdminPage /> : <Navigate to="/reports" replace />}
-          />
-
-          {/* Default fallback */}
+          <Route path="/reports" element={user ? <ReportsPage /> : <Navigate to="/login" replace />} />
+          <Route path="/admin" element={user && user.admin ? <AdminPage /> : <Navigate to="/reports" replace />} />
           <Route path="*" element={user ? <Navigate to="/reports" /> : <Navigate to="/login" />} />
         </Routes>
       </Layout>

@@ -4,25 +4,30 @@ import { login } from "../../api/api";
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState(""); // success message
+
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setMessage("");
 
     try {
-      const res = await login({ email, password });
-      // Save token and user in localStorage
+      const res = await login(formData);
       localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res.user));
-      // Redirect to reports page
-      navigate("/reports");
+      setMessage("Login successful!");
+      setTimeout(() => navigate("/reports"), 1000);
     } catch (err) {
-      setError(err.response?.data?.error || "Login failed");
+      setError(
+        err.response?.data?.error || "Login failed"
+      );
     } finally {
       setLoading(false);
     }
@@ -31,36 +36,53 @@ export default function LoginForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-8 rounded shadow-md w-full max-w-md"
+      className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mx-auto mt-12 transition-all duration-200"
     >
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h2>
 
-      {error && <div className="text-red-600 mb-4">{error}</div>}
+      {message && (
+        <div className="bg-green-100 text-green-700 p-3 mb-4 rounded text-center shadow-sm">
+          {message}
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-100 text-red-700 p-3 mb-4 rounded text-center shadow-sm">
+          {error}
+        </div>
+      )}
 
       <input
         type="email"
+        name="email"
         placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full p-3 mb-4 border rounded"
+        value={formData.email}
+        onChange={handleChange}
+        className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         required
       />
       <input
         type="password"
+        name="password"
         placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full p-3 mb-6 border rounded"
+        value={formData.password}
+        onChange={handleChange}
+        className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
         required
       />
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition shadow"
       >
         {loading ? "Logging in..." : "Login"}
       </button>
     </form>
   );
 }
+
+
+
+
+
