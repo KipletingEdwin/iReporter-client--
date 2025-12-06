@@ -1,52 +1,36 @@
-import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-  const { isAuthenticated, logout, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
   return (
-    <nav className="bg-white shadow p-4 flex justify-between items-center">
-      {/* Logo */}
-      <Link to="/reports" className="text-xl font-bold text-blue-600">
-        iReporter
-      </Link>
-
-      {/* Right side */}
-      <div className="flex items-center gap-4">
-
-        {/* Not logged in */}
-        {!isAuthenticated && (
+    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
+      <div className="font-bold text-lg">
+        <Link to="/">iReporter</Link>
+      </div>
+      <div className="flex gap-4 items-center">
+        {user ? (
           <>
-            <Link className="text-gray-700 hover:text-blue-600" to="/login">
-              Login
-            </Link>
-
-            <Link className="text-gray-700 hover:text-blue-600" to="/signup">
-              Signup
-            </Link>
-          </>
-        )}
-
-        {/* Logged in */}
-        {isAuthenticated && (
-          <>
-            <span className="text-gray-600">Hi, {user?.email}</span>
-
-            <Link className="text-gray-700 hover:text-blue-600" to="/reports">
-              Reports
-            </Link>
-
-            <Link className="text-gray-700 hover:text-blue-600" to="/admin">
-              Admin
-            </Link>
-
-            <button
-              onClick={logout}
-              className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-            >
+            <span>{user.name}</span>
+            <Link to="/reports" className="hover:underline">Reports</Link>
+            {user.admin && (
+              <Link to="/admin" className="hover:underline">Admin</Link>
+            )}
+            <button onClick={handleLogout} className="bg-red-500 px-2 py-1 rounded hover:bg-red-600">
               Logout
             </button>
+          </>
+        ) : (
+          <>
+            <Link to="/login" className="hover:underline">Login</Link>
+            <Link to="/signup" className="hover:underline">Sign Up</Link>
           </>
         )}
       </div>

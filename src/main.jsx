@@ -1,13 +1,40 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "../src/styles/index.css";
-import { AuthProvider } from "./context/AuthContext.jsx";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+import Layout from "./components/layout/Layout";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import ReportsPage from "./pages/ReportsPage";
+import AdminPage from "./pages/AdminPage";
+
+import "./styles/index.css";
+
+const user = JSON.parse(localStorage.getItem("user") || "null");
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <Router>
+      <Layout>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+
+          {/* Private routes */}
+          <Route
+            path="/reports"
+            element={user ? <ReportsPage /> : <Navigate to="/login" replace />}
+          />
+          <Route
+            path="/admin"
+            element={user && user.admin ? <AdminPage /> : <Navigate to="/reports" replace />}
+          />
+
+          {/* Default fallback */}
+          <Route path="*" element={user ? <Navigate to="/reports" /> : <Navigate to="/login" />} />
+        </Routes>
+      </Layout>
+    </Router>
   </React.StrictMode>
 );

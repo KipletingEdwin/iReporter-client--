@@ -1,21 +1,27 @@
-import { useEffect, useState } from "react";
-import reportService from "../api/reportService";
-import ReportList from "../components/reports/ReportList";
+import { useState, useEffect } from "react";
 import ReportForm from "../components/reports/ReportForm";
-import ReportDetail from "../components/reports/ReportDetail";
+import ReportList from "../components/reports/ReportList";
+import { getReports } from "../api/api";
 
 export default function ReportsPage() {
   const [reports, setReports] = useState([]);
-  const [selectedReport, setSelectedReport] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [editingReport, setEditingReport] = useState(null);
+
+  const token = localStorage.getItem("token");
 
   const fetchReports = async () => {
-    const data = await reportService.getAll();
-    setReports(data);
-  };
-
-  const handleCreate = async (formData) => {
-    await reportService.create(formData);
-    fetchReports();
+    setLoading(true);
+    setError("");
+    try {
+      const data = await getReports(token);
+      setReports(data);
+    } catch (err) {
+      setError("Failed to load reports");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -23,22 +29,19 @@ export default function ReportsPage() {
   }, []);
 
   return (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-
-      <div className="md:col-span-1">
-        <ReportForm onSubmit={handleCreate} />
-      </div>
-
-      <div className="md:col-span-1">
-        <h2 className="font-bold text-xl mb-4">Reports</h2>
-        <ReportList reports={reports} onSelect={setSelectedReport} />
-      </div>
-
-      <div className="md:col-span-1">
-        <h2 className="font-bold text-xl mb-4">Details</h2>
-        <ReportDetail report={selectedReport} />
-      </div>
-
+    <div className="p-6">
+      <h1 className="text-2xl font-bold mb-4">Reports</h1>
+      {error && <div className="text-red-600 mb-4">{error}</div>}
+      <ReportForm
+        fetchReports={fetchReports}
+        editingReport={editingReport}
+        setEditingReport={setEditingReport}
+      />
+      <ReportList
+        reports={reports}
+        fetchReports={fetchReports}
+        setEditingReport={setEditingReport}
+      />
     </div>
   );
 }
