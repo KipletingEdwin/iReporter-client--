@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../api/api";
+import Spinner from "../Spinner";
 
 export default function SignupForm() {
   const navigate = useNavigate();
@@ -37,6 +38,14 @@ export default function SignupForm() {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <form
@@ -99,7 +108,8 @@ export default function SignupForm() {
         disabled={loading}
         className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition shadow"
       >
-        {loading ? "Creating Account..." : "Sign Up"}
+        {/* {loading ? "Creating Account..." : "Sign Up"} */}
+        Sign Up
       </button>
 
       <p className="mt-4 text-center text-gray-600">

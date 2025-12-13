@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../api/api";
+import Spinner from "../Spinner";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -23,7 +24,11 @@ export default function LoginForm() {
       localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res.user));
       setMessage("Login successful!");
-      setTimeout(() => navigate("/reports"), 1000);
+      // setTimeout(() => navigate("/reports"), 1000);
+      setTimeout(()=>{
+        navigate('/reports',{replace: true});
+      },1000)
+      // navigate('/reports',{ replace: true});
     } catch (err) {
       setError(
         err.response?.data?.error || "Login failed"
@@ -32,6 +37,14 @@ export default function LoginForm() {
       setLoading(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
 
   return (
     <form
@@ -76,18 +89,16 @@ export default function LoginForm() {
         disabled={loading}
         className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition shadow"
       >
-        {loading ? "Logging in..." : "Login"}
+        {/* {loading ? "Logging in..." : "Login"} */}
+        {/* {loading ? <Spinner size="sm" /> : "Login"} */}
+        Login
       </button>
 
-      {/* <p className="mt-4 text-center text-gray-600 "
-      >Don't have an account? <Link to="/signup" className="text-blue-600 hover:text-blue-700 font-medium transition"  >Sign Up</Link>  </p> */}
-      
       <p className="mt-4 text-center text-gray-600">
         Don’t have an account? <Link to="/signup" className="text-blue-600 hover:text-blue-700 font-medium transition" >
           Sign up
         </Link>
       </p>
-
       
     </form>
   );

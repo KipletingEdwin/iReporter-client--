@@ -11,20 +11,65 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <div className="font-bold text-lg"><Link to="/">iReporter</Link></div>
-      <div className="flex gap-4 items-center">
+    <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+      {/* Logo */}
+      <Link
+        to="/"
+        className="text-2xl font-semibold tracking-wide text-blue-700 hover:text-blue-800 transition"
+      >
+        iReporter
+      </Link>
+
+      {/* Right side */}
+      <div className="flex items-center gap-6">
         {user ? (
           <>
-            <span>{user.name}</span>
-            <Link to="/reports" className="hover:underline">Reports</Link>
-            {user.admin && <Link to="/admin" className="hover:underline">Admin</Link>}
-            <button onClick={handleLogout} className="bg-red-500 px-2 py-1 rounded hover:bg-red-600">Logout</button>
+            {/* User name */}
+            <span className="text-gray-700 font-medium bg-gray-200 px-3 py-1 rounded-full text-sm">
+              {user.name}
+            </span>
+
+            {/* Reports */}
+            <Link
+              to="/reports"
+              className="text-gray-800 hover:text-blue-600 transition font-medium"
+            >
+              Reports
+            </Link>
+
+            {/* Admin link */}
+            {user.admin && (
+              <Link
+                to="/admin"
+                className="text-gray-800 hover:text-blue-600 transition font-medium"
+              >
+                Admin
+              </Link>
+            )}
+
+            {/* Logout button */}
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition shadow-sm"
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="hover:underline">Login</Link>
-            <Link to="/signup" className="hover:underline">Sign Up</Link>
+            <Link
+              to="/login"
+              className="text-gray-800 hover:text-blue-600 transition font-medium"
+            >
+              Login
+            </Link>
+
+            <Link
+              to="/signup"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm"
+            >
+              Sign Up
+            </Link>
           </>
         )}
       </div>
