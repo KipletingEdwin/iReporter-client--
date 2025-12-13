@@ -24,10 +24,10 @@ export default function LoginForm() {
       localStorage.setItem("token", res.token);
       localStorage.setItem("user", JSON.stringify(res.user));
       setMessage("Login successful!");
-      // setTimeout(() => navigate("/reports"), 1000);
-      setTimeout(()=>{
-        navigate('/reports',{replace: true});
-      },1000)
+      setTimeout(() => navigate("/reports"), 1000);
+      // setTimeout(()=>{
+      //   navigate('/reports',{replace: true});
+      // },1000)
       // navigate('/reports',{ replace: true});
     } catch (err) {
       setError(

@@ -11,6 +11,8 @@ export default function ReportList({
   const [deletingId, setDeletingId] = useState(null);
   const token = localStorage.getItem("token");
 
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this report?")) return;
     try {
@@ -70,32 +72,36 @@ export default function ReportList({
               {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
             </span>
           </div>
-          <div className="flex gap-2 mt-4">
-            <button
-              onClick={() => setEditingReport(r)}
-              className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(r.id)}
-              disabled={deletingId === r.id}
-              className={`px-3 py-1 rounded flex items-center justify-center gap-2 text-white transition ${
-                deletingId === r.id
-                  ? "bg-red-400 cursor-not-allowed"
-                  : "bg-red-600 hover:bg-red-700"
-              }`}
-            >
-              {deletingId === r.id ? (
-                <>
-                  <Spinner />
-                  Deleting...
-                </>
-              ) : (
-                "Delete"
-              )}
-            </button>
-          </div>
+
+          {user && (user.admin || r.user_id === user.id) && (
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={() => setEditingReport(r)}
+                className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition"
+              >
+                Edit
+              </button>
+
+              <button
+                onClick={() => handleDelete(r.id)}
+                disabled={deletingId === r.id}
+                className={`px-3 py-1 rounded flex items-center justify-center gap-2 text-white transition ${
+                  deletingId === r.id
+                    ? "bg-red-400 cursor-not-allowed"
+                    : "bg-red-600 hover:bg-red-700"
+                }`}
+              >
+                {deletingId === r.id ? (
+                  <>
+                    <Spinner />
+                    Deleting...
+                  </>
+                ) : (
+                  "Delete"
+                )}
+              </button>
+            </div>
+          )}
         </div>
       ))}
     </div>
