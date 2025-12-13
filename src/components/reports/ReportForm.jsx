@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createReport, updateReport } from "../../api/api";
-//import Spinner from "../Spinner"; // reuse spinner
+import Spinner from "../Spinner";
 
 export default function ReportForm({ fetchReports, editingReport, setEditingReport }) {
   const token = localStorage.getItem("token");
@@ -112,7 +112,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
       >
         {loading ? (
           <>
-            {/* <Spinner /> */}
+            <Spinner />
             {editingReport ? "Updating..." : "Creating..."}
           </>
         ) : (
