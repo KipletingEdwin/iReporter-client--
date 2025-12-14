@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  fetchReports,
+  getReports,
   updateReport,
   deleteReport,
 } from "../api/api";
@@ -25,7 +25,7 @@ export default function AdminPage() {
   const loadReports = async () => {
     try {
       setLoading(true);
-      const data = await fetchReports(token);
+      const data = await getReports(token);
       setReports(data);
     } catch (err) {
       alert("Failed to load reports");
@@ -72,6 +72,20 @@ export default function AdminPage() {
     );
   }
 
+  const statusBadge = (status) => {
+    switch (status) {
+      case "draft":
+        return "bg-gray-200 text-gray-800";
+      case "submitted":
+        return "bg-yellow-100 text-yellow-800";
+      case "resolved":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-200 text-gray-800";
+    }
+  };
+  
+
   return (
     <div className="max-w-6xl mx-auto mt-10 px-4">
       <h1 className="text-3xl font-bold mb-6">Admin Dashboard</h1>
@@ -80,7 +94,7 @@ export default function AdminPage() {
         <p className="text-gray-600">No reports available.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full bg-white shadow rounded-lg">
+          <table className="w-full bg-white shadow-md rounded-lg overflow-hidden ">
             <thead className="bg-gray-100">
               <tr>
                 <th className="p-3 text-left">Title</th>
@@ -91,32 +105,44 @@ export default function AdminPage() {
             </thead>
             <tbody>
               {reports.map((r) => (
-                <tr key={r.id} className="border-t">
+                <tr key={r.id} className="border-t hover:bg-gray-50 transition">
                   <td className="p-3 font-medium">{r.title}</td>
                   <td className="p-3 text-gray-600">
                     {r.user?.name || "Unknown"}
                   </td>
+
                   <td className="p-3">
-                    <select
-                      value={r.status}
-                      disabled={updatingId === r.id}
-                      onChange={(e) =>
-                        handleStatusChange(r.id, e.target.value)
-                      }
-                      className="border rounded px-2 py-1"
-                    >
-                      <option value="draft">Draft</option>
-                      <option value="submitted">Submitted</option>
-                      <option value="resolved">Resolved</option>
-                    </select>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${statusBadge(
+                          r.status
+                        )}`}
+                      >
+                        {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
+                      </span>
+
+                      <select
+                        value={r.status}
+                        disabled={updatingId === r.id}
+                        onChange={(e) =>
+                          handleStatusChange(r.id, e.target.value)
+                        }
+                        className="border border-gray-300 rounded px-2 py-1 text-sm focus:ring-2 focus:ring-blue-400"
+                      >
+                        <option value="draft">Draft</option>
+                        <option value="submitted">Submitted</option>
+                        <option value="resolved">Resolved</option>
+                      </select>
+                    </div>
                   </td>
+
                   <td className="p-3 flex gap-2">
                     <button
                       onClick={() => handleDelete(r.id)}
                       disabled={deletingId === r.id}
-                      className={`px-3 py-1 rounded text-white ${
+                      className={`px-4 py-1.5 rounded-md text-white text-sm transition ${
                         deletingId === r.id
-                          ? "bg-red-400"
+                          ? "bg-red-400 cursor-not-allowed "
                           : "bg-red-600 hover:bg-red-700"
                       }`}
                     >

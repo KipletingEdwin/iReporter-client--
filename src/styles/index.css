@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
-/* body {
+body {
     @apply bg-gray-100;
-    font-family: "Montserrat", sans-serif;
-} */
+    /* font-family: "Montserrat", sans-serif; */
+    font-family: "Roboto", sans-serif;
+}
 
 
 

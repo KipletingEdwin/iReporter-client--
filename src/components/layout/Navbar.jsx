@@ -11,7 +11,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-white/80 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+    <nav className="w-full bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
       {/* Logo */}
       <Link
         to="/"
@@ -20,37 +20,44 @@ export default function Navbar() {
         iReporter
       </Link>
 
-      {/* Right side */}
       <div className="flex items-center gap-6">
         {user ? (
           <>
-            {/* User name */}
-            <span className="text-gray-700 font-medium bg-gray-200 px-3 py-1 rounded-full text-sm">
-              {user.name}
-            </span>
-
-            {/* Reports */}
+            {/* My Reports */}
             <Link
               to="/reports"
-              className="text-gray-800 hover:text-blue-600 transition font-medium"
+              className="text-gray-700 hover:text-blue-600 hover:underline underline-offset-4 transition"
             >
-              Reports
+              My Reports
             </Link>
 
-            {/* Admin link */}
+            {/* Create Report */}
+            <Link
+              to="/reports/new"
+              className="text-gray-700 hover:text-blue-600 hover:underline underline-offset-4 transition"
+            >
+              Create Report
+            </Link>
+
+            {/* Admin Panel */}
             {user.admin && (
               <Link
                 to="/admin"
-                className="text-gray-800 hover:text-blue-600 transition font-medium"
+                className="text-gray-700 hover:text-blue-600 hover:underline underline-offset-4 transition"
               >
-                Admin
+                Admin Panel
               </Link>
             )}
 
-            {/* Logout button */}
+            {/* User Chip */}
+            <span className="text-blue-700 bg-blue-50 px-3 py-1 rounded-full text-sm font-medium">
+              {user.name}
+            </span>
+
+            {/* Logout */}
             <button
               onClick={handleLogout}
-              className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition shadow-sm"
+              className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition shadow-sm"
             >
               Logout
             </button>
@@ -59,14 +66,14 @@ export default function Navbar() {
           <>
             <Link
               to="/login"
-              className="text-gray-800 hover:text-blue-600 transition font-medium"
+              className="text-gray-700 hover:text-blue-600 hover:underline underline-offset-4 transition"
             >
               Login
             </Link>
 
             <Link
               to="/signup"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm"
+              className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition shadow-sm"
             >
               Sign Up
             </Link>
