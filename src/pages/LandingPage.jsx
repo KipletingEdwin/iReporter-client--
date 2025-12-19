@@ -1,44 +1,33 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-
-  // Redirect logged-in users straight to reports
-  useEffect(() => {
-    if (token) {
-      navigate("/reports");
-    }
-  }, [token, navigate]);
-
   return (
-    <div className="min-h-screen bg-slate-950 text-gray-100 flex flex-col">
-      {/* ================= HERO SECTION ================= */}
-      <section className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-5xl text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-blue-700 mb-6">
-            iReporter
+    <div className="bg-slate-950 text-slate-100">
+
+      {/* ================= HERO ================= */}
+      <section className="min-h-[85vh] flex items-center">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+            Report Issues. <br />
+            <span className="text-blue-500">Make Your City Better.</span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-700 mb-10">
-            Report community issues. Track progress.  
-            <span className="block mt-2 font-medium">
-              Transparency made simple.
-            </span>
+          <p className="text-slate-400 max-w-2xl mx-auto mb-10 text-lg">
+            iReporter allows citizens to report issues, track progress,
+            and ensure transparency between the public and authorities.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex justify-center gap-4">
             <Link
               to="/signup"
-              className="bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-medium hover:bg-blue-700 transition shadow-lg"
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition"
             >
               Get Started
             </Link>
 
             <Link
               to="/login"
-              className="border border-blue-600 text-blue-600 px-8 py-4 rounded-xl text-lg font-medium hover:bg-blue-50 transition"
+              className="border border-slate-700 hover:border-slate-500 px-6 py-3 rounded-lg font-medium transition"
             >
               Login
             </Link>
@@ -46,114 +35,101 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ================= PROBLEM / SOLUTION ================= */}
-      <section className="py-20 ">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-3xl font-bold mb-4">The Problem</h2>
-            <ul className="space-y-3 text-gray-600 text-lg">
-              <li>❌ Community issues go unreported</li>
-              <li>❌ No transparency on progress</li>
-              <li>❌ Citizens feel unheard</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-3xl font-bold mb-4 text-blue-700">
-              The Solution
-            </h2>
-            <ul className="space-y-3 text-gray-600 text-lg">
-              <li>✅ Report issues in minutes</li>
-              <li>✅ Track status in real-time</li>
-              <li>✅ Clear accountability</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* ================= HOW IT WORKS ================= */}
-      <section className="py-20 ">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12">How It Works</h2>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">📝</div>
-              <h3 className="font-semibold text-xl mb-2">Create a Report</h3>
-              <p className="text-gray-600">
-                Describe the issue and where it’s located.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">🔄</div>
-              <h3 className="font-semibold text-xl mb-2">Track Progress</h3>
-              <p className="text-gray-600">
-                Draft → Submitted → Resolved.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow">
-              <div className="text-4xl mb-4">✅</div>
-              <h3 className="font-semibold text-xl mb-2">Resolution</h3>
-              <p className="text-gray-600">
-                Authorities update and resolve issues transparently.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= FEATURES ================= */}
-      <section className="py-20 ">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            Key Features
+          <h2 className="text-3xl font-bold mb-12">
+            How It Works
           </h2>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <Feature icon="🧑‍💻" title="User & Admin Roles" />
-            <Feature icon="📊" title="Status Tracking" />
-            <Feature icon="🔐" title="Secure Authentication" />
-            <Feature icon="⚡" title="Fast & Responsive" />
-            <Feature icon="📱" title="Mobile Friendly" />
-            <Feature icon="🧩" title="Clean UI & UX" />
+          <div className="grid md:grid-cols-3 gap-8">
+            <FeatureCard
+              icon="📝"
+              title="Create a Report"
+              description="Describe an issue and its location in just a few clicks."
+            />
+            <FeatureCard
+              icon="🔄"
+              title="Track Progress"
+              description="Follow your report from draft to resolution."
+            />
+            <FeatureCard
+              icon="✅"
+              title="Get Resolution"
+              description="Authorities review and update issues transparently."
+            />
           </div>
         </div>
       </section>
 
-      {/* ================= FINAL CTA ================= */}
-      <section className="py-20 bg-blue-600 text-white text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">
-          Ready to make a difference?
-        </h2>
-        <p className="text-lg mb-8">
-          Join iReporter and help improve your community.
-        </p>
-        <Link
-          to="/signup"
-          className="bg-white text-blue-600 px-8 py-4 rounded-xl text-lg font-medium hover:bg-gray-100 transition shadow-lg"
-        >
-          Get Started Now
-        </Link>
+      {/* ================= WHY iREPORTER ================= */}
+      <section className="py-24 bg-slate-900/30">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-12">
+            Why iReporter?
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8 text-left">
+            <Reason title="Transparency">
+              Citizens can see what’s being addressed and what’s not.
+            </Reason>
+
+            <Reason title="Accountability">
+              Reports are traceable and time-stamped.
+            </Reason>
+
+            <Reason title="Impact">
+              Your voice contributes to real-world change.
+            </Reason>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= CTA ================= */}
+      <section className="py-24">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-6">
+            Ready to make a difference?
+          </h2>
+
+          <p className="text-slate-400 mb-10">
+            Join iReporter today and help improve your community.
+          </p>
+
+          <Link
+            to="/signup"
+            className="inline-block bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-lg font-medium transition"
+          >
+            Create an Account
+          </Link>
+        </div>
       </section>
 
       {/* ================= FOOTER ================= */}
-      {/* <footer className="bg-gray-900 text-gray-300 py-6 text-center">
-        <p>
-          &copy; {new Date().getFullYear()} iReporter. All rights reserved.
-        </p>
-      </footer> */}
+      <footer className="border-t border-slate-800 py-6 text-center text-slate-500">
+        © {new Date().getFullYear()} iReporter. All rights reserved.
+      </footer>
     </div>
   );
 }
 
-/* ================= Feature Component ================= */
-function Feature({ icon, title }) {
+/* ================= SMALL COMPONENTS ================= */
+
+function FeatureCard({ icon, title, description }) {
   return (
-    <div className="bg-gray-50 p-6 rounded-xl shadow-sm text-center">
-      <div className="text-3xl mb-3">{icon}</div>
-      <h3 className="font-semibold text-lg">{title}</h3>
+    <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl transition hover:-translate-y-1 hover:border-slate-700">
+      <div className="text-4xl mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-slate-400">{description}</p>
+    </div>
+  );
+}
+
+function Reason({ title, children }) {
+  return (
+    <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl">
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-slate-400">{children}</p>
     </div>
   );
 }
