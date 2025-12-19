@@ -13,7 +13,7 @@ export default function LandingPage() {
   }, [token, navigate]);
 
   return (
-    <div className="bg-gray-100 text-gray-800">
+    <div className="min-h-screen bg-slate-950 text-gray-100 flex flex-col">
       {/* ================= HERO SECTION ================= */}
       <section className="min-h-screen flex items-center justify-center px-6">
         <div className="max-w-5xl text-center">
@@ -47,7 +47,7 @@ export default function LandingPage() {
       </section>
 
       {/* ================= PROBLEM / SOLUTION ================= */}
-      <section className="py-20 bg-white">
+      <section className="py-20 ">
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12">
           <div>
             <h2 className="text-3xl font-bold mb-4">The Problem</h2>
@@ -72,7 +72,7 @@ export default function LandingPage() {
       </section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 ">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-12">How It Works</h2>
 
@@ -105,7 +105,7 @@ export default function LandingPage() {
       </section>
 
       {/* ================= FEATURES ================= */}
-      <section className="py-20 bg-white">
+      <section className="py-20 ">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-12">
             Key Features

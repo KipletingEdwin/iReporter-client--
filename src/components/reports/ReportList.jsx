@@ -55,55 +55,78 @@ export default function ReportList({
   }
 
   return (
-    <div className="mt-6 grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      {reports.map((r) => (
-        <div
-          key={r.id}
-          className="p-4 bg-white shadow rounded flex flex-col justify-between transition-transform transform hover:scale-105 hover:shadow-lg"
+<div className="mt-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  {reports.map((r) => (
+    <div
+      key={r.id}
+      className="
+        p-5 rounded-xl
+        bg-slate-900 border border-slate-800
+        shadow-md shadow-black/40
+        flex flex-col justify-between
+        transition-all duration-200
+        hover:scale-[1.02] hover:shadow-lg
+      "
+    >
+      <div>
+        <h2 className="font-semibold text-lg mb-1 text-gray-100">
+          {r.title}
+        </h2>
+
+        <p className="text-gray-400 text-sm mb-3 line-clamp-3">
+          {r.description}
+        </p>
+
+        <span
+          className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${statusClass(
+            r.status
+          )}`}
         >
-          <div>
-            <h2 className="font-bold text-lg mb-1">{r.title}</h2>
-            <p className="text-gray-700 mb-2">{r.description}</p>
-            <span
-              className={`inline-block px-2 py-1 rounded-full text-sm font-medium ${statusClass(
-                r.status
-              )}`}
-            >
-              {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
-            </span>
-          </div>
+          {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
+        </span>
+      </div>
 
-          {user && (user.admin || r.user_id === user.id) && (
-            <div className="flex gap-2 mt-4">
-              <button
-                onClick={() => setEditingReport(r)}
-                className="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500 transition"
-              >
-                Edit
-              </button>
+      {user && (user.admin || r.user_id === user.id) && (
+        <div className="flex gap-2 mt-5">
+          <button
+            onClick={() => setEditingReport(r)}
+            className="
+              flex-1 bg-slate-700 text-gray-100
+              px-3 py-2 rounded-md text-sm
+              hover:bg-slate-600 transition
+            "
+          >
+            Edit
+          </button>
 
-              <button
-                onClick={() => handleDelete(r.id)}
-                disabled={deletingId === r.id}
-                className={`px-3 py-1 rounded flex items-center justify-center gap-2 text-white transition ${
-                  deletingId === r.id
-                    ? "bg-red-400 cursor-not-allowed"
-                    : "bg-red-600 hover:bg-red-700"
-                }`}
-              >
-                {deletingId === r.id ? (
-                  <>
-                    <Spinner />
-                    Deleting...
-                  </>
-                ) : (
-                  "Delete"
-                )}
-              </button>
-            </div>
-          )}
+          <button
+            onClick={() => handleDelete(r.id)}
+            disabled={deletingId === r.id}
+            className={`
+              flex-1 px-3 py-2 rounded-md text-sm
+              flex items-center justify-center gap-2
+              text-white transition
+              ${
+                deletingId === r.id
+                  ? "bg-red-500/60 cursor-not-allowed"
+                  : "bg-red-600 hover:bg-red-700"
+              }
+            `}
+          >
+            {deletingId === r.id ? (
+              <>
+                <Spinner size="sm" />
+                Deleting…
+              </>
+            ) : (
+              "Delete"
+            )}
+          </button>
         </div>
-      ))}
+      )}
     </div>
+  ))}
+</div>
+
   );
 }
