@@ -1,7 +1,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
-export default function Navbar() {
+export default function Navbar({theme, toggleTheme}) {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -26,7 +27,7 @@ export default function Navbar() {
   };
 
   // Helper: detect landing page
-  const isLanding = location.pathname === "/";
+  // const isLanding = location.pathname === "/";
 
   return (
     <nav
@@ -49,6 +50,15 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           {!user && (
             <>
+
+        <button
+          onClick={toggleTheme}
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 transition"
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <Sun/> : <Moon />}
+        </button>
+
               <Link
                 to="/login"
                 className="text-gray-800 hover:text-blue-600 transition font-medium"
@@ -111,18 +121,16 @@ export default function Navbar() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d={
-                menuOpen
-                  ? "M6 18L18 6M6 6l12 12"
-                  : "M4 6h16M4 12h16M4 18h16"
-              }
+              d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
             />
           </svg>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      {menuOpen && (
+
+
+      {/* {menuOpen && (
         <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-4">
           {!user && (
             <>
@@ -176,7 +184,73 @@ export default function Navbar() {
             </>
           )}
         </div>
-      )}
+      )} */}
+
+
+
+
+
+
+{menuOpen && (
+  <div className="md:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 space-y-4">
+    {!user && (
+      <>
+        <Link
+          to="/login"
+          onClick={() => setMenuOpen(false)}
+          className="block text-gray-100 hover:text-blue-400 font-medium transition"
+        >
+          Login
+        </Link>
+
+        <Link
+          to="/signup"
+          onClick={() => setMenuOpen(false)}
+          className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition"
+        >
+          Sign Up
+        </Link>
+      </>
+    )}
+
+    {user && (
+      <>
+        <Link
+          to="/reports"
+          onClick={() => setMenuOpen(false)}
+          className="block text-gray-100 hover:text-blue-400 font-medium transition"
+        >
+          Reports
+        </Link>
+
+        {user.admin && (
+          <Link
+            to="/admin"
+            onClick={() => setMenuOpen(false)}
+            className="block text-gray-100 hover:text-blue-400 font-medium transition"
+          >
+            Admin
+          </Link>
+        )}
+
+        <div className="text-gray-200 font-medium bg-slate-800 px-3 py-2 rounded">
+          {user.name}
+        </div>
+
+        <button
+          onClick={handleLogout}
+          className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+      </>
+    )}
+  </div>
+)}
+
+
+
+
     </nav>
   );
 }

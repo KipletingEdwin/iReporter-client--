@@ -25,14 +25,12 @@ export default function LoginForm() {
       localStorage.setItem("user", JSON.stringify(res.user));
       setMessage("Login successful!");
       // setTimeout(() => navigate("/reports"), 1000);
-      setTimeout(()=>{
-        navigate('/reports',{replace: true});
-      },1000)
+      setTimeout(() => {
+        navigate("/reports", { replace: true });
+      }, 1000);
       // navigate('/reports',{ replace: true});
     } catch (err) {
-      setError(
-        err.response?.data?.error || "Login failed"
-      );
+      setError(err.response?.data?.error || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -47,71 +45,71 @@ export default function LoginForm() {
   }
 
   return (
-<form
-  onSubmit={handleSubmit}
-  className="
-    bg-slate-900 p-8 rounded-xl
+    <form
+      onSubmit={handleSubmit}
+      className="
+    bg-white dark:bg-slate-900 p-8 rounded-xl
     shadow-lg shadow-black/40
     w-full max-w-md mx-auto mt-12
     transition-all duration-200
   "
->
-  <h2 className="text-2xl font-semibold mb-2 text-center text-gray-100">
-    Login
-  </h2>
+    >
+      <h2 className="text-2xl font-semibold mb-2 text-center text-gray-900 dark:text-gray-100">
+        Login
+      </h2>
 
-  <p className="text-sm text-gray-400 text-center mb-6">
-    Welcome back to iReporter
-  </p>
+      <p className="text-sm text-gray-400 text-center mb-6">
+        Welcome back to iReporter
+      </p>
 
-  {message && (
-    <div className="bg-green-500/10 text-green-400 p-3 mb-4 rounded text-center text-sm">
-      {message}
-    </div>
-  )}
+      {message && (
+        <div className="bg-green-500/10 text-green-400 p-3 mb-4 rounded text-center text-sm">
+          {message}
+        </div>
+      )}
 
-  {error && (
-    <div className="bg-red-500/10 text-red-400 p-3 mb-4 rounded text-center text-sm">
-      {error}
-    </div>
-  )}
+      {error && (
+        <div className="bg-red-500/10 text-red-400 p-3 mb-4 rounded text-center text-sm">
+          {error}
+        </div>
+      )}
 
-  <input
-    type="email"
-    name="email"
-    placeholder="Email"
-    value={formData.email}
-    onChange={handleChange}
-    className="
-      w-full p-3 mb-4 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleChange}
+        className="
+      w-full p-3 mb-4 rounded-md bg-gray-50
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition
     "
-    required
-  />
+        required
+      />
 
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    value={formData.password}
-    onChange={handleChange}
-    className="
-      w-full p-3 mb-6 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleChange}
+        className="
+      w-full p-3 mb-6 rounded-md bg-gray-50
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition
     "
-    required
-  />
+        required
+      />
 
-  <button
-    type="submit"
-    disabled={loading}
-    className="
+      <button
+        type="submit"
+        disabled={loading}
+        className="
       w-full py-3 rounded-md font-medium
       bg-blue-600 text-white
       hover:bg-blue-700
@@ -119,25 +117,19 @@ export default function LoginForm() {
       disabled:opacity-60 disabled:cursor-not-allowed
       flex justify-center items-center gap-2
     "
-  >
-    {loading ? "Logging in..." : "Login"}
-  </button>
+      >
+        {loading ? "Logging in..." : "Login"}
+      </button>
 
-  <p className="mt-6 text-center text-sm text-gray-400">
-    Don’t have an account?{" "}
-    <Link
-      to="/signup"
-      className="text-blue-500 hover:text-blue-400 font-medium transition"
-    >
-      Sign up
-    </Link>
-  </p>
-</form>
-
+      <p className="mt-6 text-center text-sm text-gray-400">
+        Don’t have an account?{" "}
+        <Link
+          to="/signup"
+          className="text-blue-500 hover:text-blue-400 font-medium transition"
+        >
+          Sign up
+        </Link>
+      </p>
+    </form>
   );
 }
-
-
-
-
-

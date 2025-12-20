@@ -50,14 +50,14 @@ export default function SignupForm() {
   return (
 <form
   onSubmit={handleSubmit}
-  className="
-    bg-slate-900 p-8 rounded-xl
+  className=" bg-white
+    dark:bg-slate-900 p-8 rounded-xl
     shadow-lg shadow-black/40
     w-full max-w-md mx-auto mt-12
     transition-all duration-200
   "
 >
-  <h2 className="text-2xl font-semibold mb-2 text-center text-gray-100">
+  <h2 className="text-2xl font-semibold mb-2 text-center text-gray-900 dark:text-gray-100">
     Sign Up
   </h2>
 
@@ -83,9 +83,9 @@ export default function SignupForm() {
     placeholder="Full Name"
     value={formData.name}
     onChange={handleChange}
-    className="
+    className=" bg-white
       w-full p-3 mb-4 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition
@@ -99,9 +99,9 @@ export default function SignupForm() {
     placeholder="Email"
     value={formData.email}
     onChange={handleChange}
-    className="
+    className=" bg-white
       w-full p-3 mb-4 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition
@@ -115,9 +115,9 @@ export default function SignupForm() {
     placeholder="Password"
     value={formData.password}
     onChange={handleChange}
-    className="
+    className=" bg-white
       w-full p-3 mb-4 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition
@@ -132,8 +132,8 @@ export default function SignupForm() {
     value={formData.password_confirmation}
     onChange={handleChange}
     className="
-      w-full p-3 mb-6 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
+      w-full p-3 mb-6 rounded-md bg-white
+      dark:bg-slate-800 text-gray-100 placeholder-gray-400
       border border-slate-700
       focus:outline-none focus:ring-2 focus:ring-blue-600
       transition

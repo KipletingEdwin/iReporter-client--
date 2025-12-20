@@ -1,7 +1,11 @@
 export default function Footer() {
   return (
-    <footer className="bg-gray-200 text-center p-4 mt-6">
-      &copy; {new Date().getFullYear()} iReporter. All rights reserved.
+    // <footer className="border-t border-slate-800 py-6 text-center text-slate-500">
+    //   © {new Date().getFullYear()} iReporter. All rights reserved.
+    // </footer>
+
+    <footer className="border-t border-slate-800 py-6 text-center text-slate-500">
+      © {new Date().getFullYear()} iReporter. All rights reserved.
     </footer>
   );
 }

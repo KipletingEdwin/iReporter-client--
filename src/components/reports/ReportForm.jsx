@@ -53,8 +53,8 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-slate-900 p-6 shadow-lg rounded-lg mb-6">
-      <h2 className="font-bold text-xl mb-4 text-gray-100 ">{editingReport ? "Edit Report" : "New Report"}</h2>
+    <form onSubmit={handleSubmit} className=" bg-white dark:bg-slate-900 p-6 shadow-lg rounded-lg mb-6">
+      <h2 className="font-bold text-xl mb-4 text-gray-900 dark:text-gray-100 ">{editingReport ? "Edit Report" : "New Report"}</h2>
 
       {error && (
         <div className="bg-red-500/10 text-red-400 p-3 mb-4 rounded text-sm">{error}</div>
