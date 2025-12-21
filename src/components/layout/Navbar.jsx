@@ -1,13 +1,15 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
+import useTheme from "../../hooks/useTheme";
 
-export default function Navbar({theme, toggleTheme}) {
+export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
@@ -50,14 +52,20 @@ export default function Navbar({theme, toggleTheme}) {
         <div className="hidden md:flex items-center gap-6">
           {!user && (
             <>
-
-        <button
-          onClick={toggleTheme}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 dark:bg-slate-800 hover:bg-gray-300 dark:hover:bg-slate-700 transition"
-          aria-label="Toggle theme"
-        >
-          {theme === "dark" ? <Sun/> : <Moon />}
-        </button>
+              <button
+                onClick={toggleTheme}
+                className="w-10 h-10 flex items-center justify-center rounded-full
+                        bg-slate-200 dark:bg-slate-800
+                        hover:bg-slate-300 dark:hover:bg-slate-700
+                        transition-colors"
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? (
+                  <Sun size={18} className="text-yellow-400" />
+                ) : (
+                  <Moon size={18} className="text-slate-700" />
+                )}
+              </button>
 
               <Link
                 to="/login"
@@ -127,24 +135,22 @@ export default function Navbar({theme, toggleTheme}) {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-
-
-      {/* {menuOpen && (
-        <div className="md:hidden bg-white shadow-md px-6 py-4 space-y-4">
+      {menuOpen && (
+        <div className="md:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 space-y-4">
           {!user && (
             <>
               <Link
                 to="/login"
                 onClick={() => setMenuOpen(false)}
-                className="block text-gray-800 hover:text-blue-600 font-medium"
+                className="block text-gray-100 hover:text-blue-400 font-medium transition"
               >
                 Login
               </Link>
+
               <Link
                 to="/signup"
                 onClick={() => setMenuOpen(false)}
-                className="block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition"
               >
                 Sign Up
               </Link>
@@ -156,7 +162,7 @@ export default function Navbar({theme, toggleTheme}) {
               <Link
                 to="/reports"
                 onClick={() => setMenuOpen(false)}
-                className="block text-gray-800 hover:text-blue-600 font-medium"
+                className="block text-gray-100 hover:text-blue-400 font-medium transition"
               >
                 Reports
               </Link>
@@ -165,92 +171,26 @@ export default function Navbar({theme, toggleTheme}) {
                 <Link
                   to="/admin"
                   onClick={() => setMenuOpen(false)}
-                  className="block text-gray-800 hover:text-blue-600 font-medium"
+                  className="block text-gray-100 hover:text-blue-400 font-medium transition"
                 >
                   Admin
                 </Link>
               )}
 
-              <div className="text-gray-700 font-medium bg-gray-200 px-3 py-2 rounded">
+              <div className="text-gray-200 font-medium bg-slate-800 px-3 py-2 rounded">
                 {user.name}
               </div>
 
               <button
                 onClick={handleLogout}
-                className="w-full bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition"
+                className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
               >
                 Logout
               </button>
             </>
           )}
         </div>
-      )} */}
-
-
-
-
-
-
-{menuOpen && (
-  <div className="md:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 space-y-4">
-    {!user && (
-      <>
-        <Link
-          to="/login"
-          onClick={() => setMenuOpen(false)}
-          className="block text-gray-100 hover:text-blue-400 font-medium transition"
-        >
-          Login
-        </Link>
-
-        <Link
-          to="/signup"
-          onClick={() => setMenuOpen(false)}
-          className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition"
-        >
-          Sign Up
-        </Link>
-      </>
-    )}
-
-    {user && (
-      <>
-        <Link
-          to="/reports"
-          onClick={() => setMenuOpen(false)}
-          className="block text-gray-100 hover:text-blue-400 font-medium transition"
-        >
-          Reports
-        </Link>
-
-        {user.admin && (
-          <Link
-            to="/admin"
-            onClick={() => setMenuOpen(false)}
-            className="block text-gray-100 hover:text-blue-400 font-medium transition"
-          >
-            Admin
-          </Link>
-        )}
-
-        <div className="text-gray-200 font-medium bg-slate-800 px-3 py-2 rounded">
-          {user.name}
-        </div>
-
-        <button
-          onClick={handleLogout}
-          className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-        >
-          Logout
-        </button>
-      </>
-    )}
-  </div>
-)}
-
-
-
-
+      )}
     </nav>
   );
 }

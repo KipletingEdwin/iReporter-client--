@@ -1,16 +1,38 @@
 @import "tailwindcss";
 
-body {
-    @apply bg-gray-100;
-    /* font-family: "Montserrat", sans-serif; */
-    font-family: "Roboto", sans-serif;
-}
+  @layer base {
+    :root {
+      /* Light mode */
+      --bg-app: #f8fafc;            /* slate-50 */
+      --bg-surface: #ffffff;
+      --text-primary: #0f172a;      /* slate-900 */
+      --text-secondary: #475569;    /* slate-600 */
+      --border-color: #e2e8f0;      /* slate-200 */
+      --primary: #2563eb;           /* blue-600 */
+    }
+  
+    .dark {
+      /* Dark mode */
+      --bg-app: #020617;            /* slate-950 */
+      --bg-surface: #0f172a;        /* slate-900 */
+      --text-primary: #f8fafc;      /* slate-50 */
+      --text-secondary: #94a3b8;    /* slate-400 */
+      --border-color: #1e293b;      /* slate-800 */
+      --primary: #3b82f6;           /* blue-500 */
+    }
+  
+    body {
+      background-color: var(--bg-app);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: "Roboto", sans-serif;
+    }
+  }
 
 
 
 
-
-/* @keyframes fade-in {
+  /* @keyframes fade-in {
     from { opacity: 0; transform: translateY(-8px); }
     to { opacity: 1; transform: translateY(0); }
   }

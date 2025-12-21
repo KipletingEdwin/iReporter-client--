@@ -28,7 +28,6 @@ export default function LoginForm() {
       setTimeout(() => {
         navigate("/reports", { replace: true });
       }, 1000);
-      // navigate('/reports',{ replace: true});
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
     } finally {
@@ -48,7 +47,7 @@ export default function LoginForm() {
     <form
       onSubmit={handleSubmit}
       className="
-    bg-white dark:bg-slate-900 p-8 rounded-xl
+    p-8 rounded-xl
     shadow-lg shadow-black/40
     w-full max-w-md mx-auto mt-12
     transition-all duration-200

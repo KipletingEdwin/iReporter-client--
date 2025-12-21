@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
-    <div className="bg-slate-950 text-slate-100">
+    <div className="bg-(--bg-app)">
 
       {/* ================= HERO ================= */}
       <section className="min-h-[85vh] flex items-center">
