@@ -33,10 +33,10 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full sticky top-0 z-50 transition-all duration-300 ${
+      className={`w-full sticky top-0 z-50 transition-all duration-300 bg-(--bg-surface)   ${
         scrolled
-          ? "bg-white shadow-md py-3"
-          : "bg-white/80 backdrop-blur-md py-4"
+          ? "shadow-md py-3"
+          : "backdrop-blur-md py-4"
       }`}
     >
       <div className=" mx-auto px-6 flex justify-between items-center">
@@ -52,6 +52,8 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           {!user && (
             <>
+
+            {/* Dark/light theme buttop */}
               <button
                 onClick={toggleTheme}
                 className="w-10 h-10 flex items-center justify-center rounded-full
@@ -136,9 +138,31 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-slate-900 border-t border-slate-800 px-6 py-4 space-y-4">
+        <div className="md:hidden  border-t border-slate-800 px-6 py-4 space-y-4">
           {!user && (
             <>
+            <div className="flex items-center justify-between">
+              {/* <span className="text-sm text-(--text-secondary)" >
+                Theme
+              </span> */}
+              <button
+              onClick={toggleTheme}
+              className="w-10 h-10 flex items-center justify-center rounded-full 
+              bg-(--border-color) hover:opacity-80 transition " aria-label="Toggle theme"
+              
+              >
+                {
+                  theme === "dark" ? (
+                    <Sun size={18} className="text-yellow-400"    />
+                  ) : (
+                    <Moon size={18} className="text-(--text-primary)"    />
+                  )
+                }
+
+              </button>
+
+            </div>
+
               <Link
                 to="/login"
                 onClick={() => setMenuOpen(false)}
