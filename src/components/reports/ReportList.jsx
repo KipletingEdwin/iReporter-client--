@@ -69,6 +69,7 @@ export default function ReportList({
       hover:scale-[1.02] hover:shadow-lg
     "
     >
+      
       <div>
         <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
           {r.title}
@@ -88,6 +89,7 @@ export default function ReportList({
       </div>
 
       {user && (user.admin || r.user_id === user.id) && (
+            console.log(r),
         <div className="flex gap-2 mt-5">
           <button
             onClick={() => setEditingReport(r)}

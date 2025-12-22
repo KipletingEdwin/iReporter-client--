@@ -9,6 +9,9 @@ export default function ReportsPage() {
   const [error, setError] = useState("");
   const [editingReport, setEditingReport] = useState(null);
 
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  //console.log(user);
+
   const token = localStorage.getItem("token");
 
   const fetchReports = async () => {
@@ -32,11 +35,13 @@ export default function ReportsPage() {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Reports</h1>
       {error && <div className="text-red-600 mb-4">{error}</div>}
-      <ReportForm
-        fetchReports={fetchReports}
-        editingReport={editingReport}
-        setEditingReport={setEditingReport}
-      />
+      {!user.admin && (
+        <ReportForm
+          fetchReports={fetchReports}
+          editingReport={editingReport}
+          setEditingReport={setEditingReport}
+        />
+      )}
       <ReportList
         reports={reports}
         fetchReports={fetchReports}
