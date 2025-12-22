@@ -37,7 +37,7 @@ export default function LoginForm() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-(--bg-app)">
         <Spinner size="lg" />
       </div>
     );
@@ -50,14 +50,15 @@ export default function LoginForm() {
     p-8 rounded-xl
     shadow-lg shadow-black/40
     w-full max-w-md mx-auto mt-12
+    bg-(--bg-surface)
     transition-all duration-200
   "
     >
-      <h2 className="text-2xl font-semibold mb-2 text-center text-gray-900 dark:text-gray-100">
+      <h2 className="text-2xl font-semibold mb-2 text-center text-(--text-primary)">
         Login
       </h2>
 
-      <p className="text-sm text-gray-400 text-center mb-6">
+      <p className="text-sm text-(--text-secondary) text-center mb-6">
         Welcome back to iReporter
       </p>
 
@@ -80,10 +81,11 @@ export default function LoginForm() {
         value={formData.email}
         onChange={handleChange}
         className="
-      w-full p-3 mb-4 rounded-md bg-gray-50
-      dark:bg-slate-800 text-gray-100 placeholder-gray-400
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
+      w-full p-3 mb-4 rounded-md bg-(--bg-surface)
+      text-(--text-primary)
+      placeholder-(--text-secondary)
+      border border-(--border-color)
+      focus:outline-none focus:ring-2 focus:ring-(--primary)
       transition
     "
         required
@@ -96,10 +98,11 @@ export default function LoginForm() {
         value={formData.password}
         onChange={handleChange}
         className="
-      w-full p-3 mb-6 rounded-md bg-gray-50
-      dark:bg-slate-800 text-gray-100 placeholder-gray-400
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
+      w-full p-3 mb-6 rounded-md
+       bg-(--bg-surface)
+       text-(--text-primary) placeholder-(--text-secondary)
+      border border-(--border-color)
+      focus:outline-none focus:ring-2 focus:ring-(--primary)
       transition
     "
         required
@@ -110,8 +113,9 @@ export default function LoginForm() {
         disabled={loading}
         className="
       w-full py-3 rounded-md font-medium
-      bg-blue-600 text-white
-      hover:bg-blue-700
+      bg-(--primary)
+       text-white
+      hover:opacity-90
       transition
       disabled:opacity-60 disabled:cursor-not-allowed
       flex justify-center items-center gap-2
@@ -120,11 +124,11 @@ export default function LoginForm() {
         {loading ? "Logging in..." : "Login"}
       </button>
 
-      <p className="mt-6 text-center text-sm text-gray-400">
+      <p className="mt-6 text-center text-sm text-(--text-secondary) ">
         Don’t have an account?{" "}
         <Link
           to="/signup"
-          className="text-blue-500 hover:text-blue-400 font-medium transition"
+          className="text-(--primary) hover:opacity-80 font-medium transition"
         >
           Sign up
         </Link>
