@@ -4,7 +4,7 @@ export default function Footer() {
     //   © {new Date().getFullYear()} iReporter. All rights reserved.
     // </footer>
 
-    <footer className="border-t border-slate-800 py-6 text-center text-slate-500">
+    <footer className="border-t border-slate-800 py-6 text-center text-(--text-secondary)">
       © {new Date().getFullYear()} iReporter. All rights reserved.
     </footer>
   );

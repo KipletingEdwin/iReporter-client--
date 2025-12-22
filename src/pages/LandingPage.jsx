@@ -1,9 +1,9 @@
+import { CheckCircle, FileText, ListChecks } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
     <div className="bg-(--bg-app)">
-
       {/* ================= HERO ================= */}
       <section className="min-h-[85vh] flex items-center">
         <div className="max-w-6xl mx-auto px-6 text-center">
@@ -13,8 +13,8 @@ export default function LandingPage() {
           </h1>
 
           <p className="text-slate-400 max-w-2xl mx-auto mb-10 text-lg">
-            iReporter allows citizens to report issues, track progress,
-            and ensure transparency between the public and authorities.
+            iReporter allows citizens to report issues, track progress, and
+            ensure transparency between the public and authorities.
           </p>
 
           <div className="flex justify-center gap-4">
@@ -27,7 +27,8 @@ export default function LandingPage() {
 
             <Link
               to="/login"
-              className="border border-slate-700 hover:border-slate-500 px-6 py-3 rounded-lg font-medium transition"
+              className="border border-slate-700 hover:border-slate-500 px-6 py-3 rounded-lg 
+              font-medium transition"
             >
               Login
             </Link>
@@ -38,23 +39,21 @@ export default function LandingPage() {
       {/* ================= HOW IT WORKS ================= */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12">
-            How It Works
-          </h2>
+          <h2 className="text-3xl font-bold mb-12">How It Works</h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
-              icon="📝"
+              icon={<FileText size={36} />}
               title="Create a Report"
               description="Describe an issue and its location in just a few clicks."
             />
             <FeatureCard
-              icon="🔄"
+              icon={<ListChecks size={36} />}
               title="Track Progress"
               description="Follow your report from draft to resolution."
             />
             <FeatureCard
-              icon="✅"
+              icon={<CheckCircle size={36} />}
               title="Get Resolution"
               description="Authorities review and update issues transparently."
             />
@@ -63,11 +62,9 @@ export default function LandingPage() {
       </section>
 
       {/* ================= WHY iREPORTER ================= */}
-      <section className="py-24 bg-slate-900/30">
+      <section className="py-24 ">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12">
-            Why iReporter?
-          </h2>
+          <h2 className="text-3xl font-bold mb-12">Why iReporter?</h2>
 
           <div className="grid md:grid-cols-3 gap-8 text-left">
             <Reason title="Transparency">
@@ -92,7 +89,7 @@ export default function LandingPage() {
             Ready to make a difference?
           </h2>
 
-          <p className="text-slate-400 mb-10">
+          <p className="text-(--text-secondary) mb-10">
             Join iReporter today and help improve your community.
           </p>
 
@@ -112,19 +109,24 @@ export default function LandingPage() {
 
 function FeatureCard({ icon, title, description }) {
   return (
-    <div className="bg-slate-900 border border-slate-800 p-8 rounded-xl transition hover:-translate-y-1 hover:border-slate-700">
-      <div className="text-4xl mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-slate-400">{description}</p>
+    <div
+      className="bg-(--bg-surface) border border-(--border-color) p-8 rounded-xl 
+    transition hover:-translate-y-1 hover:border-(--primary)"
+    >
+      <div className="text-4xl mb-4 flex items-center justify-center  text-(--primary) ">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2 text-(--primary)">{title}</h3>
+      <p className="text-(--text-secondary)">{description}</p>
     </div>
   );
 }
 
 function Reason({ title, children }) {
   return (
-    <div className="bg-slate-900 border border-slate-800 p-6 rounded-xl">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-slate-400">{children}</p>
+    <div className="bg-(-bg-surface) border border-(--border-color) p-6 rounded-xl">
+      <h3 className="text-xl font-semibold mb-2 text-(--text-primary)    ">
+        {title}
+      </h3>
+      <p className="text-(--text-secondary)">{children}</p>
     </div>
   );
 }

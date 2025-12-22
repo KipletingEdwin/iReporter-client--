@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Menu, Moon, Sun, X } from "lucide-react";
 import useTheme from "../../hooks/useTheme";
 
 export default function Navbar() {
@@ -118,22 +118,13 @@ export default function Navbar() {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden text-gray-800 focus:outline-none"
+          className="md:hidden p-2 rounded-lg text-(--text-primary) hover:text(--primary)  transition  focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          <svg
-            className="w-7 h-7"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={2}
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d={menuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
-            />
-          </svg>
+          {
+            menuOpen ? ( <X className="w-7 h-7" />) : (<Menu className="w-7 h-7" />)
+          }
+
         </button>
       </div>
 
@@ -142,9 +133,6 @@ export default function Navbar() {
           {!user && (
             <>
             <div className="flex items-center justify-between">
-              {/* <span className="text-sm text-(--text-secondary)" >
-                Theme
-              </span> */}
               <button
               onClick={toggleTheme}
               className="w-10 h-10 flex items-center justify-center rounded-full 
@@ -166,7 +154,7 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setMenuOpen(false)}
-                className="block text-gray-100 hover:text-blue-400 font-medium transition"
+                className=" block text-(--text-primary) text-center  hover:text-blue-400 font-medium transition "
               >
                 Login
               </Link>
@@ -174,7 +162,7 @@ export default function Navbar() {
               <Link
                 to="/signup"
                 onClick={() => setMenuOpen(false)}
-                className="block bg-blue-600 text-white px-4 py-2 rounded-lg text-center hover:bg-blue-700 transition"
+                className="  block text-(--text-primary) text-center hover:text-blue-400 font-medium transition    "
               >
                 Sign Up
               </Link>
