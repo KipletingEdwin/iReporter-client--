@@ -34,9 +34,7 @@ export default function Navbar() {
   return (
     <nav
       className={`w-full sticky top-0 z-50 transition-all duration-300 bg-(--bg-surface)   ${
-        scrolled
-          ? "shadow-md py-3"
-          : "backdrop-blur-md py-4"
+        scrolled ? "shadow-md py-3" : "backdrop-blur-md py-4"
       }`}
     >
       <div className=" mx-auto px-6 flex justify-between items-center">
@@ -52,32 +50,31 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-6">
           {!user && (
             <>
-
-            {/* Dark/light theme buttop */}
+              {/* Dark/light theme buttop */}
               <button
                 onClick={toggleTheme}
                 className="w-10 h-10 flex items-center justify-center rounded-full
-                        bg-slate-200 dark:bg-slate-800
-                        hover:bg-slate-300 dark:hover:bg-slate-700
+                        bg-(--btn-bg)
+                        hover:bg-(--btn-bg-hover)
                         transition-colors"
                 aria-label="Toggle theme"
               >
                 {theme === "dark" ? (
-                  <Sun size={18} className="text-yellow-400" />
+                  <Sun size={18} className="text-(--icon-sun)" />
                 ) : (
-                  <Moon size={18} className="text-slate-700" />
+                  <Moon size={18} className="text(--icon-moon)" />
                 )}
               </button>
 
               <Link
                 to="/login"
-                className="text-gray-800 hover:text-blue-600 transition font-medium"
+                className="text-(--primary-text) hover:text-blue-600 transition font-medium"
               >
                 Login
               </Link>
               <Link
                 to="/signup"
-                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-sm"
+                className=" text-(--primary-text)  hover:bg-blue-700 transition font-medium"
               >
                 Sign Up
               </Link>
@@ -121,16 +118,17 @@ export default function Navbar() {
           className="md:hidden p-2 rounded-lg text-(--text-primary) hover:text(--primary)  transition  focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
         >
-          {
-            menuOpen ? ( <X className="w-7 h-7 rotate-90 transition-transform duration-200" />) : (<Menu className="w-7 h-7" />)
-          }
-
+          {menuOpen ? (
+            <X className="w-7 h-7 rotate-90 transition-transform duration-200" />
+          ) : (
+            <Menu className="w-7 h-7" />
+          )}
         </button>
       </div>
 
       {menuOpen && (
-  <div
-    className="
+        <div
+          className="
       md:hidden
       bg-(--surface)
       border-t border-(--border-color)
@@ -138,13 +136,13 @@ export default function Navbar() {
       space-y-4
       animate-in slide-in-from-top-2
     "
-  >
-    {/* Top row: Theme toggle */}
-    <div className="flex justify-end">
-      <button
-        onClick={toggleTheme}
-        aria-label="Toggle theme"
-        className="
+        >
+          {/* Top row: Theme toggle */}
+          <div className="flex justify-end">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="
           w-10 h-10 flex items-center justify-center
           rounded-full
           bg-(--border-color)
@@ -152,111 +150,112 @@ export default function Navbar() {
           hover:opacity-80
           transition
         "
-      >
-        {theme === "dark" ? (
-          <Sun size={18} className="text-yellow-400" />
-        ) : (
-          <Moon size={18} />
-        )}
-      </button>
-    </div>
+            >
+              {theme === "dark" ? (
+                <Sun size={18} className="text-(--icon-sun)" />
+              ) : (
+                <Moon size={18} className="text-(--icon-moon)" />
+              )}
+            </button>
+          </div>
 
-    {/* Guest links */}
-    {!user && (
-      <div className="space-y-3">
-        <Link
-          to="/login"
-          onClick={() => setMenuOpen(false)}
-          className="
-            block w-full text-center
-            py-3 rounded-lg
-            text-(--text-primary)
-            bg-(--bg-surface)
-            hover:bg-(--border-color)
-            transition
-          "
-        >
-          Login
-        </Link>
+          {/* Guest links */}
+          {!user && (
+            <div className="space-y-3">
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className="
+      block w-full text-center py-3 rounded-lg
+      bg-(--bg-surface)
+      text-(--text-primary)
+      border border-(--border-color)
+      hover:bg-(--border-color)
+      transition
+    "
+              >
+                Login
+              </Link>
 
-        <Link
-          to="/signup"
-          onClick={() => setMenuOpen(false)}
-          className="
-            block w-full text-center
-            py-3 rounded-lg
-            bg-(--primary)
-            text-white
-            hover:opacity-90
-            transition
-          "
-        >
-          Sign Up
-        </Link>
-      </div>
-    )}
+              <Link
+                to="/signup"
+                onClick={() => setMenuOpen(false)}
+                className="
+      block w-full text-center py-3 rounded-lg
+      bg-(--bg-surface)
+      text-(--text-primary)
+      border border-(--border-color)
+      hover:bg-(--border-color)
+      transition
+    "
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
 
-    {/* Authenticated links */}
-    {user && (
-      <div className="space-y-3">
-        <Link
-          to="/reports"
-          onClick={() => setMenuOpen(false)}
-          className="
-            block w-full py-3 px-4 rounded-lg
-            text-(--text-primary)
-            bg-(--bg-surface)
-            hover:bg-(--border-color)
-            transition
-          "
-        >
-          Reports
-        </Link>
+          {/* Authenticated links */}
+          {user && (
+            <div className="space-y-3">
+              <Link
+                to="/reports"
+                onClick={() => setMenuOpen(false)}
+                className="
+      block w-full py-3 px-4 rounded-lg
+      bg-(--bg-surface)
+      text-(--text-primary)
+      border border-(--border-color)
+      hover:bg-(--border-color)
+      transition
+    "
+              >
+                Reports
+              </Link>
 
-        {user.admin && (
-          <Link
-            to="/admin"
-            onClick={() => setMenuOpen(false)}
-            className="
-              block w-full py-3 px-4 rounded-lg
-              text-(--text-primary)
-              bg-(--bg-surface)
-              hover:bg-(--border-color)
-              transition
-            "
-          >
-            Admin
-          </Link>
-        )}
+              {user.admin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setMenuOpen(false)}
+                  className="
+        block w-full py-3 px-4 rounded-lg
+        bg-(--bg-surface)
+        text-(--text-primary)
+        border border-(--border-color)
+        hover:bg-(--border-color)
+        transition
+      "
+                >
+                  Admin
+                </Link>
+              )}
 
-        <div
-          className="
-            px-4 py-3 rounded-lg
-            text-sm
-            text-(--text-secondary)
-            bg-(--bg-surface)
-          "
-        >
-          Signed in as <span className="font-medium">{user.name}</span>
+              <div
+                className="
+      px-4 py-3 rounded-lg
+      text-sm
+      bg-(--bg-surface)
+      text-(--text-secondary)
+      border border-(--border-color)
+    "
+              >
+                Signed in as <span className="font-medium">{user.name}</span>
+              </div>
+
+              <button
+                onClick={handleLogout}
+                className="
+      w-full py-3 rounded-lg
+      bg-red-600 text-white
+      hover:bg-red-700
+      transition
+    "
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-
-        <button
-          onClick={handleLogout}
-          className="
-            w-full py-3 rounded-lg
-            bg-red-600 text-white
-            hover:bg-red-700
-            transition
-          "
-        >
-          Logout
-        </button>
-      </div>
-    )}
-  </div>
-)}
-
-      
+      )}
     </nav>
   );
 }

@@ -9,6 +9,10 @@
       --text-secondary: #475569;    /* slate-600 */
       --border-color: #e2e8f0;      /* slate-200 */
       --primary: #2563eb;           /* blue-600 */
+      --icon-sun: #facc15;   /* yellow-400 */
+      --icon-moon: #334155;  /* slate-700 */
+      --btn-bg: #e2e8f0;        /* slate-200 */
+      --btn-bg-hover: #cbd5e1;  /* slate-300 */
     }
   
     .dark {
@@ -19,6 +23,10 @@
       --text-secondary: #94a3b8;    /* slate-400 */
       --border-color: #1e293b;      /* slate-800 */
       --primary: #3b82f6;           /* blue-500 */
+      --icon-sun: #facc15;   /* stays bright in dark mode */
+      --icon-moon: #cbd5e1;  /* slate-300 for better contrast */
+      --btn-bg: #1e293b;        /* slate-800 */
+      --btn-bg-hover: #334155;  /* slate-700 */
     }
   
     body {
