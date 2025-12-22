@@ -60,20 +60,21 @@ export default function ReportList({
     <div
       key={r.id}
       className="
-        p-5 rounded-xl
-        bg-slate-900 border border-slate-800
-        shadow-md shadow-black/40
-        flex flex-col justify-between
-        transition-all duration-200
-        hover:scale-[1.02] hover:shadow-lg
-      "
+      p-5 rounded-xl
+      bg-(--bg-surface)
+      border border-(--border-color)
+      shadow-md shadow-black/10 dark:shadow-black/40
+      flex flex-col justify-between
+      transition-all duration-200
+      hover:scale-[1.02] hover:shadow-lg
+    "
     >
       <div>
-        <h2 className="font-semibold text-lg mb-1 text-gray-100">
+        <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
           {r.title}
         </h2>
 
-        <p className="text-gray-400 text-sm mb-3 line-clamp-3">
+        <p className="text-sm mb-3 line-clamp-3 text-(--text-secondary)">
           {r.description}
         </p>
 
@@ -91,10 +92,12 @@ export default function ReportList({
           <button
             onClick={() => setEditingReport(r)}
             className="
-              flex-1 bg-slate-700 text-gray-100
-              px-3 py-2 rounded-md text-sm
-              hover:bg-slate-600 transition
-            "
+            flex-1 px-3 py-2 rounded-md text-sm
+            bg-(--border-color)
+            text-(--text-primary)
+            hover:opacity-80
+            transition
+          "
           >
             Edit
           </button>

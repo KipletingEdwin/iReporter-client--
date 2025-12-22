@@ -122,87 +122,141 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {
-            menuOpen ? ( <X className="w-7 h-7" />) : (<Menu className="w-7 h-7" />)
+            menuOpen ? ( <X className="w-7 h-7 rotate-90 transition-transform duration-200" />) : (<Menu className="w-7 h-7" />)
           }
 
         </button>
       </div>
 
       {menuOpen && (
-        <div className="md:hidden  border-t border-slate-800 px-6 py-4 space-y-4">
-          {!user && (
-            <>
-            <div className="flex items-center justify-between">
-              <button
-              onClick={toggleTheme}
-              className="w-10 h-10 flex items-center justify-center rounded-full 
-              bg-(--border-color) hover:opacity-80 transition " aria-label="Toggle theme"
-              
-              >
-                {
-                  theme === "dark" ? (
-                    <Sun size={18} className="text-yellow-400"    />
-                  ) : (
-                    <Moon size={18} className="text-(--text-primary)"    />
-                  )
-                }
+  <div
+    className="
+      md:hidden
+      bg-(--surface)
+      border-t border-(--border-color)
+      px-6 py-5
+      space-y-4
+      animate-in slide-in-from-top-2
+    "
+  >
+    {/* Top row: Theme toggle */}
+    <div className="flex justify-end">
+      <button
+        onClick={toggleTheme}
+        aria-label="Toggle theme"
+        className="
+          w-10 h-10 flex items-center justify-center
+          rounded-full
+          bg-(--border-color)
+          text-(--text-primary)
+          hover:opacity-80
+          transition
+        "
+      >
+        {theme === "dark" ? (
+          <Sun size={18} className="text-yellow-400" />
+        ) : (
+          <Moon size={18} />
+        )}
+      </button>
+    </div>
 
-              </button>
+    {/* Guest links */}
+    {!user && (
+      <div className="space-y-3">
+        <Link
+          to="/login"
+          onClick={() => setMenuOpen(false)}
+          className="
+            block w-full text-center
+            py-3 rounded-lg
+            text-(--text-primary)
+            bg-(--bg-surface)
+            hover:bg-(--border-color)
+            transition
+          "
+        >
+          Login
+        </Link>
 
-            </div>
+        <Link
+          to="/signup"
+          onClick={() => setMenuOpen(false)}
+          className="
+            block w-full text-center
+            py-3 rounded-lg
+            bg-(--primary)
+            text-white
+            hover:opacity-90
+            transition
+          "
+        >
+          Sign Up
+        </Link>
+      </div>
+    )}
 
-              <Link
-                to="/login"
-                onClick={() => setMenuOpen(false)}
-                className=" block text-(--text-primary) text-center  hover:text-blue-400 font-medium transition "
-              >
-                Login
-              </Link>
+    {/* Authenticated links */}
+    {user && (
+      <div className="space-y-3">
+        <Link
+          to="/reports"
+          onClick={() => setMenuOpen(false)}
+          className="
+            block w-full py-3 px-4 rounded-lg
+            text-(--text-primary)
+            bg-(--bg-surface)
+            hover:bg-(--border-color)
+            transition
+          "
+        >
+          Reports
+        </Link>
 
-              <Link
-                to="/signup"
-                onClick={() => setMenuOpen(false)}
-                className="  block text-(--text-primary) text-center hover:text-blue-400 font-medium transition    "
-              >
-                Sign Up
-              </Link>
-            </>
-          )}
+        {user.admin && (
+          <Link
+            to="/admin"
+            onClick={() => setMenuOpen(false)}
+            className="
+              block w-full py-3 px-4 rounded-lg
+              text-(--text-primary)
+              bg-(--bg-surface)
+              hover:bg-(--border-color)
+              transition
+            "
+          >
+            Admin
+          </Link>
+        )}
 
-          {user && (
-            <>
-              <Link
-                to="/reports"
-                onClick={() => setMenuOpen(false)}
-                className="block text-gray-100 hover:text-blue-400 font-medium transition"
-              >
-                Reports
-              </Link>
-
-              {user.admin && (
-                <Link
-                  to="/admin"
-                  onClick={() => setMenuOpen(false)}
-                  className="block text-gray-100 hover:text-blue-400 font-medium transition"
-                >
-                  Admin
-                </Link>
-              )}
-
-              <div className="text-gray-200 font-medium bg-slate-800 px-3 py-2 rounded">
-                {user.name}
-              </div>
-
-              <button
-                onClick={handleLogout}
-                className="w-full bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-              >
-                Logout
-              </button>
-            </>
-          )}
+        <div
+          className="
+            px-4 py-3 rounded-lg
+            text-sm
+            text-(--text-secondary)
+            bg-(--bg-surface)
+          "
+        >
+          Signed in as <span className="font-medium">{user.name}</span>
         </div>
-      )}
+
+        <button
+          onClick={handleLogout}
+          className="
+            w-full py-3 rounded-lg
+            bg-red-600 text-white
+            hover:bg-red-700
+            transition
+          "
+        >
+          Logout
+        </button>
+      </div>
+    )}
+  </div>
+)}
+
+      
     </nav>
   );
 }

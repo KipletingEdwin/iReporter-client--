@@ -70,11 +70,16 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         placeholder="Title"
         value={formData.title}
         onChange={handleChange}
-        className="w-full p-3 mb-3 rounded-md
-      text-gray-100 placeholder-gray-400
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
-      transition"
+        className="
+        w-full p-3 mb-3 rounded-md
+        bg-(--bg-surface)
+        text-(--text-primary)
+        placeholder:text-(--text-secondary)
+        border border-(--border-color)
+        focus:outline-none
+        focus:ring-2 focus:ring-(--primary)
+        transition
+      "
         required
       />
 
@@ -84,11 +89,16 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         value={formData.description}
         onChange={handleChange}
         rows={4}
-        className="w-full p-3 mb-3 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
-      transition"
+        className="
+        w-full p-3 mb-3 rounded-md
+        bg-(--bg-surface)
+        text-(--text-primary)
+        placeholder:text-(--text-secondary)
+        border border-(--border-color)
+        focus:outline-none
+        focus:ring-2 focus:ring-(--primary)
+        transition
+      "
         required
       />
 
@@ -98,22 +108,31 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         placeholder="Location"
         value={formData.location}
         onChange={handleChange}
-        className="w-full p-3 mb-3 rounded-md
-      bg-slate-800 text-gray-100 placeholder-gray-400
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
-      transition"
+        className="
+        w-full p-3 mb-3 rounded-md
+        bg-(--bg-surface)
+        text-(--text-primary)
+        placeholder:text-(--text-secondary)
+        border border-(--border-color)
+        focus:outline-none
+        focus:ring-2 focus:ring-(--primary)
+        transition
+      "
       />
 
       <select
         name="status"
         value={formData.status}
         onChange={handleChange}
-        className="w-full p-3 mb-4 rounded-md
-      bg-slate-800 text-gray-100
-      border border-slate-700
-      focus:outline-none focus:ring-2 focus:ring-blue-600
-      transition"
+        className="
+        w-full p-3 mb-4 rounded-md
+        bg-(--bg-surface)
+        text-(--text-primary)
+        border border-(--border-color)
+        focus:outline-none
+        focus:ring-2 focus:ring-(--primary)
+        transition
+      "
       >
         <option value="draft">Draft</option>
         <option value="submitted">Submitted</option>
@@ -125,8 +144,9 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         disabled={loading}
         className={`
           w-full py-3 rounded-md font-medium
-          bg-blue-600 text-white
-          hover:bg-blue-700
+          bg-(--primary)
+          text-white
+          hover:opacity-90
           transition
           flex justify-center items-center gap-2
           ${loading ? "opacity-60 cursor-not-allowed" : ""}
