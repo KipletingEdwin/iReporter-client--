@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+const API_URL = "http://localhost:3000";  //Local host enviroment
 
 export const signup = async (data) => {
   const res = await axios.post(`${API_URL}/signup`, data);

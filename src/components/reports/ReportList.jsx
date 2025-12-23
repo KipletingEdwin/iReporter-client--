@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { deleteReport } from "../../api/api";
 import Spinner from "../Spinner";
 
@@ -10,9 +10,7 @@ export default function ReportList({
 }) {
   const [deletingId, setDeletingId] = useState(null);
   const token = localStorage.getItem("token");
-
   const user = JSON.parse(localStorage.getItem("user") || "null");
-
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this report?")) return;
     try {
@@ -55,11 +53,11 @@ export default function ReportList({
   }
 
   return (
-<div className="mt-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-  {reports.map((r) => (
-    <div
-      key={r.id}
-      className="
+    <div className="mt-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {reports.map((r) => (
+        <div
+          key={r.id}
+          className="
       p-5 rounded-xl
       bg-(--bg-surface)
       border border-(--border-color)
@@ -68,46 +66,46 @@ export default function ReportList({
       transition-all duration-200
       hover:scale-[1.02] hover:shadow-lg
     "
-    >
-      
-      <div>
-        <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
-          {r.title}
-        </h2>
-
-        <p className="text-sm mb-3 line-clamp-3 text-(--text-secondary)">
-          {r.description}
-        </p>
-
-        <span
-          className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${statusClass(
-            r.status
-          )}`}
         >
-          {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
-        </span>
-      </div>
+          <div>
+            <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
+              {r.title}
+            </h2>
 
-      {user && (user.admin || r.user_id === user.id) && (
-            console.log(r),
-        <div className="flex gap-2 mt-5">
-          <button
-            onClick={() => setEditingReport(r)}
-            className="
+            <p className="text-sm mb-3 line-clamp-3 text-(--text-secondary)">
+              {r.description}
+            </p>
+
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${statusClass(
+                r.status
+              )}`}
+            >
+              {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
+            </span>
+          </div>
+
+          {user && (user.admin || r.user_id === user.id) && (
+            // console.log(user.admin),
+            <div className="flex gap-2 mt-5">
+              <button
+                onClick={() => setEditingReport(r)}
+                //onClick={() => console.log("You just clicked me")}
+                className="
             flex-1 px-3 py-2 rounded-md text-sm
             bg-(--border-color)
             text-(--text-primary)
             hover:opacity-80
             transition
           "
-          >
-            Edit
-          </button>
+              >
+                Edit
+              </button>
 
-          <button
-            onClick={() => handleDelete(r.id)}
-            disabled={deletingId === r.id}
-            className={`
+              <button
+                onClick={() => handleDelete(r.id)}
+                disabled={deletingId === r.id}
+                className={`
               flex-1 px-3 py-2 rounded-md text-sm
               flex items-center justify-center gap-2
               text-white transition
@@ -117,21 +115,20 @@ export default function ReportList({
                   : "bg-red-600 hover:bg-red-700"
               }
             `}
-          >
-            {deletingId === r.id ? (
-              <>
-                <Spinner size="sm" />
-                Deleting…
-              </>
-            ) : (
-              "Delete"
-            )}
-          </button>
+              >
+                {deletingId === r.id ? (
+                  <>
+                    <Spinner size="sm" />
+                    Deleting…
+                  </>
+                ) : (
+                  "Delete"
+                )}
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      ))}
     </div>
-  ))}
-</div>
-
   );
 }
