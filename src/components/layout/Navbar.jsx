@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { 
+  // useEffect,
+  useState } from "react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "../ui/ThemeToggle";
 
@@ -28,9 +30,11 @@ export default function Navbar() {
     <nav
       className={`
         w-full sticky top-0 z-50 transition-all duration-300 bg-(--bg-surface/80) backdrop-blur-xl
-        border-b border-(--border-color) ${scrolled ? "shadow-md py-3" : "backdrop-blur-md py-4 "    }
-      `} >
-
+        border-b border-(--border-color) ${
+          scrolled ? "shadow-md py-3" : "backdrop-blur-md py-4 "
+        }
+      `}
+    >
       <div className="mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link
@@ -58,7 +62,8 @@ export default function Navbar() {
                 after:w-0 after:bg-(--primary)
                 after:transition-all after:duration-300
                 hover:after:w-full
-              " >
+              "
+              >
                 Login
               </Link>
 
@@ -110,10 +115,9 @@ export default function Navbar() {
                 </Link>
               )}
 
-            <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold cursor-pointer ">
-              {user.name.charAt(0).toUpperCase()}
-            </div>
-
+              <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold cursor-pointer ">
+                {user.name.charAt(0).toUpperCase()}
+              </div>
 
               <button
                 onClick={handleLogout}
@@ -186,7 +190,7 @@ export default function Navbar() {
           )}
 
           {user && (
-            <div className="space-y-3" >
+            <div className="space-y-3">
               <Link
                 to="/reports"
                 onClick={() => setMenuOpen(false)}

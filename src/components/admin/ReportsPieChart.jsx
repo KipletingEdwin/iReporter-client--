@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 export default function ReportsPieChart({ reports }) {
   const data = [
@@ -16,17 +16,20 @@ export default function ReportsPieChart({ reports }) {
   ];
 
   return (
-    <div className="p-6 rounded-xl bg-(--bg-surface) border border-(--border-color) shadow-sm">
-      <h2 className="text-xl font-semibold mb-4 text-(--text-primary)">
-        Reports by Status
-      </h2>
+<div className="p-6 rounded-xl bg-(--bg-surface) border border-(--border-color) shadow-sm">
+  <h2 className="text-xl font-semibold mb-4 text-(--text-primary)">
+    Reports by Status
+  </h2>
 
-      <PieChart width={350} height={350}>
+  <div className="w-full h-[300px]">
+  
+    <ResponsiveContainer width="100%" height="100%">
+      <PieChart>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
-          outerRadius={100}
+          outerRadius="80%"
           dataKey="value"
           label
         >
@@ -37,6 +40,9 @@ export default function ReportsPieChart({ reports }) {
         <Tooltip />
         <Legend />
       </PieChart>
-    </div>
+    </ResponsiveContainer>
+  </div>
+</div>
+
   );
 }
