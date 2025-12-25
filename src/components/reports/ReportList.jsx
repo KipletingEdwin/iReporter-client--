@@ -9,10 +9,12 @@ export default function ReportList({
   loading,
 }) {
   const [deletingId, setDeletingId] = useState(null);
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "null");
+
   const handleDelete = async (id) => {
-    if (!confirm("Are you sure you want to delete this report?")) return;
     try {
       setDeletingId(id);
       await deleteReport(id, token);
@@ -86,11 +88,9 @@ export default function ReportList({
           </div>
 
           {user && (user.admin || r.user_id === user.id) && (
-            // console.log(user.admin),
             <div className="flex gap-2 mt-5">
               <button
                 onClick={() => setEditingReport(r)}
-                //onClick={() => console.log("You just clicked me")}
                 className="
             flex-1 px-3 py-2 rounded-md text-sm
             bg-(--border-color)
@@ -103,32 +103,76 @@ export default function ReportList({
               </button>
 
               <button
-                onClick={() => handleDelete(r.id)}
-                disabled={deletingId === r.id}
-                className={`
-              flex-1 px-3 py-2 rounded-md text-sm
-              flex items-center justify-center gap-2
-              text-white transition
-              ${
-                deletingId === r.id
-                  ? "bg-red-500/60 cursor-not-allowed"
-                  : "bg-red-600 hover:bg-red-700"
-              }
-            `}
+                onClick={() => setConfirmDeleteId(r.id)}
+                className="
+    flex-1 px-3 py-2 rounded-md text-sm
+    bg-red-600 text-white
+    hover:bg-red-700 transition
+  "
               >
-                {deletingId === r.id ? (
-                  <>
-                    <Spinner size="sm" />
-                    Deleting…
-                  </>
-                ) : (
-                  "Delete"
-                )}
+                Delete
               </button>
             </div>
           )}
         </div>
       ))}
+
+      {confirmDeleteId && (
+        <div
+          className="
+      fixed inset-0 
+      bg-black/50 
+      flex items-center justify-center 
+      z-50
+    "
+        >
+          <div
+            className="
+        bg-(--bg-surface)
+        p-6 rounded-xl shadow-xl 
+        w-[90%] max-w-md
+        border border-(--border-color)
+      "
+          >
+            <h2 className="text-xl font-semibold text-(--text-primary) mb-4">
+              Confirm Delete
+            </h2>
+
+            <p className="text-(--text-secondary) mb-6">
+              Are you sure you want to delete this report? This action cannot be
+              undone.
+            </p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setConfirmDeleteId(null)}
+                className="
+            flex-1 px-4 py-2 rounded-md
+            bg-(--border-color)
+            text-(--text-primary)
+            hover:opacity-80 transition
+          "
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={() => {
+                  handleDelete(confirmDeleteId);
+                  setConfirmDeleteId(null);
+                }}
+                className="
+            flex-1 px-4 py-2 rounded-md
+            bg-red-600 text-white
+            hover:bg-red-700 transition
+          "
+              >
+                Confirm Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

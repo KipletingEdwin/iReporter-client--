@@ -43,7 +43,7 @@ export default function SignupForm() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-(--bg-app)">
         <Spinner size="lg" />
       </div>
     );

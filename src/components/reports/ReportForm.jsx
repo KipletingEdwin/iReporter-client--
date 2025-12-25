@@ -45,6 +45,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
       }
       setFormData({ title: "", description: "", location: "", status: "draft" });
       fetchReports();
+      //onclose();
     } catch (err) {
       setError(err.response?.data?.error || "Failed to save report");
     } finally {
