@@ -1,9 +1,9 @@
 export default function DashboardCards({ reports }) {
     const total = reports.length;
-    const pending = reports.filter(r => r.status === "pending").length;
-    const investigating = reports.filter(r => r.status === "investigating").length;
-    const resolved = reports.filter(r => r.status === "resolved").length;
-    const rejected = reports.filter(r => r.status === "rejected").length;
+    const pending = reports.filter(report => report.status === "pending").length;
+    const investigating = reports.filter(report => report.status === "investigating").length;
+    const resolved = reports.filter(report => report.status === "resolved").length;
+    const rejected = reports.filter(report => report.status === "rejected").length;
   
     const cards = [
       { label: "Total Reports", value: total },
@@ -15,9 +15,9 @@ export default function DashboardCards({ reports }) {
   
     return (
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        {cards.map((card, i) => (
+        {cards.map((card, index) => (
           <div
-            key={i}
+            key={index}
             className="p-4 rounded-xl bg-(--bg-surface) border border-(--border-color) shadow-sm"
           >
             <p className="text-sm text-(--text-secondary)">{card.label}</p>

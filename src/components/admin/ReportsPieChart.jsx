@@ -2,10 +2,10 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 export default function ReportsPieChart({ reports }) {
   const data = [
-    { name: "Pending", value: reports.filter(r => r.status === "pending").length },
-    { name: "Investigating", value: reports.filter(r => r.status === "investigating").length },
-    { name: "Resolved", value: reports.filter(r => r.status === "resolved").length },
-    { name: "Rejected", value: reports.filter(r => r.status === "rejected").length },
+    { name: "Pending", value: reports.filter(report => report.status === "pending").length },
+    { name: "Investigating", value: reports.filter(report => report.status === "investigating").length },
+    { name: "Resolved", value: reports.filter(report => report.status === "resolved").length },
+    { name: "Rejected", value: reports.filter(report => report.status === "rejected").length },
   ];
 
   const COLORS = [
@@ -21,7 +21,7 @@ export default function ReportsPieChart({ reports }) {
         Reports by Status
       </h2>
 
-      <PieChart width={350} height={300}>
+      <PieChart width={350} height={350}>
         <Pie
           data={data}
           cx="50%"
