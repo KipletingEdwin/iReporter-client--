@@ -137,7 +137,10 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
       >
         <option value="draft">Draft</option>
         <option value="submitted">Submitted</option>
+        <option value="pending">Pending</option>
+        <option value="investigating">Investigating</option>     
         <option value="resolved">Resolved</option>
+        <option value="rejected">Rejected</option>
       </select>
 
       <button

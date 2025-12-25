@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { deleteReport } from "../../api/api";
 import Spinner from "../Spinner";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function ReportList({
   reports,
@@ -93,12 +94,14 @@ export default function ReportList({
                 onClick={() => setEditingReport(r)}
                 className="
             flex-1 px-3 py-2 rounded-md text-sm
-            bg-(--border-color)
+            bg-(--btn-bg)
             text-(--text-primary)
-            hover:opacity-80
+            hover:bg-(--btn-bg-hover)
             transition
+            flex items-center justify-center gap-2
           "
               >
+                <Pencil size={16} />
                 Edit
               </button>
 
@@ -107,9 +110,11 @@ export default function ReportList({
                 className="
     flex-1 px-3 py-2 rounded-md text-sm
     bg-red-600 text-white
-    hover:bg-red-700 transition
+    hover:bg-red-700 transition 
+    flex items-center justify-center gap-2
   "
               >
+                <Trash2  size={16}  />
                 Delete
               </button>
             </div>
