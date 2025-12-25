@@ -3,6 +3,7 @@ import ReportForm from "../components/reports/ReportForm";
 import ReportList from "../components/reports/ReportList";
 import Modal from "../components/common/Modal";
 import { getReports } from "../api/api";
+import { Plus } from "lucide-react";
 
 export default function ReportsPage() {
   const [reports, setReports] = useState([]);
@@ -65,11 +66,13 @@ export default function ReportsPage() {
           className="
       mb-4 px-4 py-2 rounded-md
       bg-(--primary)
-      text-white text-sm font-medium
+      text-(--primary)text-sm font-medium
       hover:bg-(--primary-hover)
       transition
+      flex items-center gap-2 cursor-pointer
     "
         >
+          <Plus size={18} />
           Create Report
         </button>
       )}

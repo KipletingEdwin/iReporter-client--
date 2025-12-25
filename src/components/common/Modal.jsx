@@ -1,3 +1,5 @@
+import { X } from "lucide-react";
+
 // src/components/common/Modal.jsx
 export default function Modal({ isOpen, title, onClose, children }) {
     if (!isOpen) return null;
@@ -28,10 +30,11 @@ export default function Modal({ isOpen, title, onClose, children }) {
   
             <button
               onClick={onClose}
-              className="text-(--text-secondary) hover:text-(--text-primary)"
+              className="text-(--text-secondary) hover:text-(--text-primary) 
+              "
               aria-label="Close"
             >
-              ✕
+              <X size={20} />
             </button>
           </div>
   

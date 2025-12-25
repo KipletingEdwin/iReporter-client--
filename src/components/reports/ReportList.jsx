@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { deleteReport } from "../../api/api";
 import Spinner from "../Spinner";
-import { Pencil, Trash2 } from "lucide-react";
+import {
+  CheckCircle,
+  Clock,
+  FileEdit,
+  Pencil,
+  Search,
+  Send,
+  Trash2,
+  XCircle,
+} from "lucide-react";
 
 export default function ReportList({
   reports,
@@ -31,14 +40,29 @@ export default function ReportList({
   const statusClass = (status) => {
     switch (status) {
       case "draft":
-        return "bg-gray-300 text-gray-800";
+        return "bg-gray-300 text-gray-800"; // Draft
       case "submitted":
-        return "bg-yellow-200 text-yellow-800";
+        return "bg-blue-200 text-blue-800"; // Submitted
+      case "pending":
+        return "bg-yellow-200 text-yellow-800"; // Pending
+      case "investigating":
+        return "bg-purple-200 text-purple-800"; // Investigating
       case "resolved":
-        return "bg-green-200 text-green-800";
+        return "bg-green-200 text-green-800"; // Resolved
+      case "rejected":
+        return "bg-red-200 text-red-800"; // Rejected
       default:
         return "bg-gray-300 text-gray-800";
     }
+  };
+
+  const statusIcons = {
+    draft: FileEdit,
+    submitted: Send,
+    pending: Clock,
+    investigating: Search,
+    resolved: CheckCircle,
+    rejected: XCircle,
   };
 
   if (loading) {
@@ -57,10 +81,12 @@ export default function ReportList({
 
   return (
     <div className="mt-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      {reports.map((r) => (
-        <div
-          key={r.id}
-          className="
+      {reports.map((r) => {
+        const Icon = statusIcons[r.status];
+        return (
+          <div
+            key={r.id}
+            className="
       p-5 rounded-xl
       bg-(--bg-surface)
       border border-(--border-color)
@@ -69,58 +95,62 @@ export default function ReportList({
       transition-all duration-200
       hover:scale-[1.02] hover:shadow-lg
     "
-        >
-          <div>
-            <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
-              {r.title}
-            </h2>
+          >
+            <div>
+              <h2 className="font-semibold text-lg mb-1 text-(--text-primary)">
+                {r.title}
+              </h2>
 
-            <p className="text-sm mb-3 line-clamp-3 text-(--text-secondary)">
-              {r.description}
-            </p>
+              <p className="text-sm mb-3 line-clamp-3 text-(--text-secondary)">
+                {r.description}
+              </p>
 
-            <span
-              className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${statusClass(
-                r.status
-              )}`}
-            >
-              {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
-            </span>
-          </div>
+              <span
+              
+                className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium ${statusClass(
+                  r.status
+                )}`}
+              >
+                <Icon size={14} />
+                {r.status.charAt(0).toUpperCase() + r.status.slice(1)}
+              </span>
+            </div>
 
-          {user && (user.admin || r.user_id === user.id) && (
-            <div className="flex gap-2 mt-5">
-              <button
-                onClick={() => setEditingReport(r)}
-                className="
+            {user && (user.admin || r.user_id === user.id) && (
+              <div className="flex gap-2 mt-5">
+                <button
+                  onClick={() => setEditingReport(r)}
+                  className="
             flex-1 px-3 py-2 rounded-md text-sm
             bg-(--btn-bg)
             text-(--text-primary)
             hover:bg-(--btn-bg-hover)
             transition
             flex items-center justify-center gap-2
+            cursor-pointer
           "
-              >
-                <Pencil size={16} />
-                Edit
-              </button>
+                >
+                  <Pencil size={16} />
+                  Edit
+                </button>
 
-              <button
-                onClick={() => setConfirmDeleteId(r.id)}
-                className="
-    flex-1 px-3 py-2 rounded-md text-sm
-    bg-red-600 text-white
-    hover:bg-red-700 transition 
-    flex items-center justify-center gap-2
-  "
-              >
-                <Trash2  size={16}  />
-                Delete
-              </button>
-            </div>
-          )}
-        </div>
-      ))}
+                <button
+                  onClick={() => setConfirmDeleteId(r.id)}
+                  className="
+                    flex-1 px-3 py-2 rounded-md text-sm
+                    bg-red-600 text-white
+                    hover:bg-red-700 transition 
+                    flex items-center justify-center gap-2 cursor-pointer
+                  "
+                >
+                  <Trash2 size={16} />
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        );
+      })}
 
       {confirmDeleteId && (
         <div
