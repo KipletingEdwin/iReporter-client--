@@ -93,7 +93,7 @@ export default function ReportList({
       shadow-md shadow-black/10 dark:shadow-black/40
       flex flex-col justify-between
       transition-all duration-200
-      hover:scale-[1.02] hover:shadow-lg
+      hover:scale-[1.02] hover:shadow-xl hover:shadow-blue-500/10 
     "
           >
             <div>

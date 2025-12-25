@@ -9,6 +9,7 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="
     w-10 h-10 flex items-center justify-center 
+    cursor-pointer
     rounded-full bg-(--btn-bg)
     hover:bg(--btn-bg-hover)
     transition-colors

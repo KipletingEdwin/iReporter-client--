@@ -5,7 +5,8 @@ export default function LandingPage() {
   return (
     <div className="bg-(--bg-app)">
       {/* ================= HERO ================= */}
-      <section className="min-h-[85vh] flex items-center">
+      <section className="min-h-[85vh] flex items-center  ">
+        
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
             Report Issues. <br />

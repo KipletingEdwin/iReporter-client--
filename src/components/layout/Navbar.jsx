@@ -27,11 +27,10 @@ export default function Navbar() {
   return (
     <nav
       className={`
-        w-full sticky top-0 z-50 transition-all duration-300
-        bg-(--bg-surface)
-        ${scrolled ? "shadow-md py-3" : "backdrop-blur-md py-4"}
-      `}
-    >
+        w-full sticky top-0 z-50 transition-all duration-300 bg-(--bg-surface/80) backdrop-blur-xl
+        border-b border-(--border-color) ${scrolled ? "shadow-md py-3" : "backdrop-blur-md py-4 "    }
+      `} >
+
       <div className="mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
         <Link
@@ -52,14 +51,27 @@ export default function Navbar() {
             <>
               <Link
                 to="/login"
-                className="text-(--text-primary) hover:text-(--primary) transition font-medium"
-              >
+                className="
+                relative font-medium text-(--text-primary)
+                hover:text-(--primary) transition
+                after:absolute after:left-0 after:-bottom-1 after:h-0.5
+                after:w-0 after:bg-(--primary)
+                after:transition-all after:duration-300
+                hover:after:w-full
+              " >
                 Login
               </Link>
 
               <Link
                 to="/signup"
-                className="text-(--text-primary) hover:text-(--primary) transition font-medium"
+                className="
+                relative font-medium text-(--text-primary)
+                hover:text-(--primary) transition
+                after:absolute after:left-0 after:-bottom-1 after:h-0.5
+                after:w-0 after:bg-(--primary)
+                after:transition-all after:duration-300
+                hover:after:w-full
+              "
               >
                 Sign Up
               </Link>
@@ -70,7 +82,14 @@ export default function Navbar() {
             <>
               <Link
                 to="/reports"
-                className="text-(--text-primary) hover:text-(--primary) transition font-medium"
+                className="
+                relative font-medium text-(--text-primary)
+                hover:text-(--primary) transition
+                after:absolute after:left-0 after:-bottom-1 after:h-0.5
+                after:w-0 after:bg-(--primary)
+                after:transition-all after:duration-300
+                hover:after:w-full
+              "
               >
                 Reports
               </Link>
@@ -78,22 +97,27 @@ export default function Navbar() {
               {user.admin && (
                 <Link
                   to="/admin"
-                  className="text-(--text-primary) hover:text-(--primary) transition font-medium"
+                  className="
+                  relative font-medium text-(--text-primary)
+                  hover:text-(--primary) transition
+                  after:absolute after:left-0 after:-bottom-1 after:h-0.5
+                  after:w-0 after:bg-(--primary)
+                  after:transition-all after:duration-300
+                  hover:after:w-full
+                "
                 >
                   Admin
                 </Link>
               )}
 
-              <span
-                className="px-3 py-1 rounded-full text-sm font-medium
-                               bg-(--primary) text-white"
-              >
-                {user.name}
-              </span>
+            <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold cursor-pointer ">
+              {user.name.charAt(0).toUpperCase()}
+            </div>
+
 
               <button
                 onClick={handleLogout}
-                className="bg-red-500 text-white px-4 py-2 rounded-lg
+                className="bg-red-500 text-white px-4 py-2 rounded-lg cursor-pointer
                            hover:bg-red-600 transition shadow-sm"
               >
                 Logout
@@ -103,7 +127,7 @@ export default function Navbar() {
         </div>
 
         {/* Mobile: Theme toggle + Hamburger */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 md:hidden mb-3">
           <ThemeToggle />
 
           <button
@@ -162,7 +186,7 @@ export default function Navbar() {
           )}
 
           {user && (
-            <div className="space-y-3">
+            <div className="space-y-3" >
               <Link
                 to="/reports"
                 onClick={() => setMenuOpen(false)}
@@ -191,14 +215,9 @@ export default function Navbar() {
                 </Link>
               )}
 
-              <div
-                className="px-4 py-3 rounded-lg text-sm
-                           bg-(--bg-surface)
-                           text-(--text-secondary)
-                           border border-(--border-color)"
-              >
-                Signed in as: <span className="font-medium">{user.name}</span>
-              </div>
+              {/* <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold">
+                {user.name.charAt(0).toUpperCase()}
+              </div> */}
 
               <button
                 onClick={handleLogout}
