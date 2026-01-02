@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation, NavLink } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import {
   // useEffect,
   useState,
@@ -8,7 +8,6 @@ import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,6 +25,16 @@ export default function Navbar() {
     ? "bg-[var(--primary)/10] border-[var(--primary)] text-[var(--primary)]" 
     : "bg-[var(--bg-surface)] border-[var(--border-color)] text-[var(--text-primary)] hover:bg-[var(--border-color)]"}
 `;
+
+const desktopNavLinkClasses = ({ isActive }) => `
+  relative font-medium transition
+  ${isActive 
+    ? "text-[var(--primary)] after:w-full" 
+    : "text-[var(--text-primary)] hover:text-[var(--primary)] after:w-0"}
+  after:absolute after:left-0 after:-bottom-1 after:h-0.5
+  after:bg-[var(--primary)] after:transition-all after:duration-300
+`;
+
 
 
   const handleLogout = () => {
@@ -63,15 +72,7 @@ export default function Navbar() {
             <>
               <NavLink
                 to="/login"
-                className={({ isActive }) =>
-                  `relative font-medium transition
-                ${
-                  isActive
-                    ? "text-(--primary) after:w-full"
-                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
-                }
-                after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:bg-(--primary) after:transition-all after:duration-300`
+                className={desktopNavLinkClasses
                 }
               >
                 Login
@@ -79,15 +80,7 @@ export default function Navbar() {
 
               <NavLink
                 to="/signup"
-                className={({ isActive }) =>
-                  `relative font-medium transition
-                ${
-                  isActive
-                    ? "text-(--primary) after:w-full"
-                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
-                }
-                after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:bg-(--primary) after:transition-all after:duration-300`
+                className={desktopNavLinkClasses
                 }
               >
                 Sign Up
@@ -99,15 +92,7 @@ export default function Navbar() {
             <>
               <NavLink
                 to="/reports"
-                className={({ isActive }) =>
-                  `relative font-medium transition
-                ${
-                  isActive
-                    ? "text-(--primary) after:w-full"
-                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
-                }
-                after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:bg-(--primary) after:transition-all after:duration-300`
+                className={desktopNavLinkClasses
                 }
               >
                 Reports
@@ -116,15 +101,7 @@ export default function Navbar() {
               {user.admin && (
                 <NavLink
                   to="/admin"
-                  className={({ isActive }) =>
-                    `relative font-medium transition
-                  ${
-                    isActive
-                      ? "text-(--primary) after:w-full"
-                      : "text-(--text-primary) hover:text-(--primary) after:w-0"
-                  }
-                  after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                  after:bg-(--primary) after:transition-all after:duration-300`
+                  className={desktopNavLinkClasses
                   }
                 >
                   Admin

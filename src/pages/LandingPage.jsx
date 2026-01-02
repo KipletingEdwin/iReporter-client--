@@ -67,7 +67,7 @@ export default function LandingPage() {
 {/* ================= WHO IS IREPORTER FOR ================= */}
 <section className="py-24">
   <div className="max-w-6xl mx-auto px-6 text-center">
-    <h2 className="text-3xl font-bold mb-12 text-[var(--text-primary)]">
+    <h2 className="text-3xl font-bold mb-12 text-(--text-primary)">
       Who is iReporter for?
     </h2>
 
