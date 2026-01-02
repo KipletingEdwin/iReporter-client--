@@ -1,4 +1,4 @@
-import { BarChart3, Building, CheckCircle, CheckCircle2, FilePlus, FileText, ListChecks, User, Users } from "lucide-react";
+import { BarChart3, Building, CheckCircle, CheckCircle2, Eye, FilePlus, FileText, ListChecks, ShieldCheck, Sparkles, User, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {
@@ -98,26 +98,39 @@ export default function LandingPage() {
 
 
 
-      {/* ================= WHY iREPORTER ================= */}
-      <section className="py-24 ">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-12">Why iReporter?</h2>
+{/* ================= WHY IREPORTER ================= */}
+<section className="py-24 bg-[var(--bg-surface)]/30">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+    <h2 className="text-3xl font-bold mb-4 text-[var(--text-primary)]">
+      Why iReporter?
+    </h2>
 
-          <div className="grid md:grid-cols-3 gap-8 text-left">
-            <Reason title="Transparency">
-              Citizens can see what’s being addressed and what’s not.
-            </Reason>
+    <p className="text-[var(--text-secondary)] max-w-2xl mx-auto mb-12">
+      iReporter bridges the gap between citizens and authorities by making reporting simple, transparent, and effective.
+    </p>
 
-            <Reason title="Accountability">
-              Reports are traceable and time-stamped.
-            </Reason>
+    <div className="grid md:grid-cols-3 gap-8">
+      <FeatureCard
+        icon={<Eye size={36} />}
+        title="Transparency"
+        description="Citizens can see what’s being addressed and what’s not, ensuring open communication."
+      />
 
-            <Reason title="Impact">
-              Your voice contributes to real-world change.
-            </Reason>
-          </div>
-        </div>
-      </section>
+      <FeatureCard
+        icon={<ShieldCheck size={36} />}
+        title="Accountability"
+        description="Reports are traceable, time-stamped, and visible to both citizens and authorities."
+      />
+
+      <FeatureCard
+        icon={<Sparkles size={36} />}
+        title="Impact"
+        description="Your voice contributes to real improvements in your community."
+      />
+    </div>
+  </div>
+</section>
+
 
       {/* ================= CTA ================= */}
       <section className="py-24">
@@ -157,13 +170,4 @@ function FeatureCard({ icon, title, description }) {
   );
 }
 
-function Reason({ title, children }) {
-  return (
-    <div className="bg-(-bg-surface) border border-(--border-color) p-6 rounded-xl">
-      <h3 className="text-xl font-semibold mb-2 text-(--text-primary)    ">
-        {title}
-      </h3>
-      <p className="text-(--text-secondary)">{children}</p>
-    </div>
-  );
-}
+
