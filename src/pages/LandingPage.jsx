@@ -1,4 +1,4 @@
-import { CheckCircle, FileText, ListChecks } from "lucide-react";
+import { BarChart3, Building, CheckCircle, CheckCircle2, FilePlus, FileText, ListChecks, User, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {
@@ -44,23 +44,59 @@ export default function LandingPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
-              icon={<FileText size={36} />}
+              icon={<FilePlus size={36} />}
               title="Create a Report"
               description="Describe an issue and its location in just a few clicks."
             />
             <FeatureCard
-              icon={<ListChecks size={36} />}
+              icon={<BarChart3 size={36} />}
               title="Track Progress"
               description="Follow your report from draft to resolution."
             />
             <FeatureCard
-              icon={<CheckCircle size={36} />}
+              icon={<CheckCircle2 size={36} />}
               title="Get Resolution"
               description="Authorities review and update issues transparently."
             />
           </div>
         </div>
       </section>
+
+{/* ================= WHO IS IREPORTER FOR ================= */}
+<section className="py-24">
+  <div className="max-w-6xl mx-auto px-6 text-center">
+    <h2 className="text-3xl font-bold mb-12 text-[var(--text-primary)]">
+      Who is iReporter for?
+    </h2>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      <FeatureCard
+        icon={<User size={36} />}
+        title="Citizens"
+        description="Anyone can report issues in their community and track progress easily."
+      />
+
+      <FeatureCard
+        icon={<Building size={36} />}
+        title="Local Authorities"
+        description="Government teams can view, manage, and resolve reports efficiently."
+      />
+
+      <FeatureCard
+        icon={<Users size={36} />}
+        title="Communities"
+        description="Neighborhood groups and organizations can monitor issues and advocate for improvements."
+      />
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
 
       {/* ================= WHY iREPORTER ================= */}
       <section className="py-24 ">

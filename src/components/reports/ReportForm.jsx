@@ -65,6 +65,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         <div className="bg-green-500/10 text-green-400 p-3 mb-4 rounded text-sm">{message}</div>
       )}
 
+      <label className="text-sm font-medium text-(--text-secondary)">Title</label>
       <input
         type="text"
         name="title"
@@ -84,6 +85,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         required
       />
 
+      <label className="text-sm font-medium text-(--text-secondary)">Description</label>
       <textarea
         name="description"
         placeholder="Description"
@@ -102,7 +104,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
       "
         required
       />
-
+      <label className="text-sm font-medium text-(--text-secondary)">Location</label>
       <input
         type="text"
         name="location"
@@ -120,20 +122,15 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         transition
       "
       />
-
-      <select
+      <label className="text-sm font-medium text-(--text-secondary)">Status</label>
+      <select disabled={!editingReport}
         name="status"
         value={formData.status}
         onChange={handleChange}
-        className="
-        w-full p-3 mb-4 rounded-md
-        bg-(--bg-surface)
-        text-(--text-primary)
-        border border-(--border-color)
-        focus:outline-none
-        focus:ring-2 focus:ring-(--primary)
-        transition
-      "
+        className={` w-full p-3 mb-4 rounded-md bg-(--bg-surface) text-(--text-primary)
+           border border-(--border-color) focus:outline-none focus:ring-2
+            focus:ring-(--primary) transition 
+            ${!editingReport ? "opacity-60 cursor-not-allowed" : ""} `}
       >
         <option value="draft">Draft</option>
         <option value="submitted">Submitted</option>
