@@ -1,4 +1,4 @@
-import { BarChart3, Building, CheckCircle, CheckCircle2, Eye, FilePlus, FileText, ListChecks, ShieldCheck, Sparkles, User, Users } from "lucide-react";
+import { BarChart3, Building, CheckCircle2, Eye, FilePlus, ShieldCheck, Sparkles, User, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function LandingPage() {

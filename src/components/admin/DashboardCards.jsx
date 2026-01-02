@@ -1,12 +1,16 @@
 export default function DashboardCards({ reports }) {
     const total = reports.length;
+    const draft = reports.filter(report => report.status === "draft").length;
     const pending = reports.filter(report => report.status === "pending").length;
+    const submitted = reports.filter(report => report === "submitted").length;
     const investigating = reports.filter(report => report.status === "investigating").length;
     const resolved = reports.filter(report => report.status === "resolved").length;
     const rejected = reports.filter(report => report.status === "rejected").length;
   
     const cards = [
       { label: "Total Reports", value: total },
+      { label: "Draft", value: draft },
+      { label: "Submitted", value: submitted},
       { label: "Pending", value: pending },
       { label: "Investigating", value: investigating },
       { label: "Resolved", value: resolved },

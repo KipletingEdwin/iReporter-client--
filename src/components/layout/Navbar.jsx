@@ -1,7 +1,8 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { 
+import { Link, useNavigate, useLocation, NavLink } from "react-router-dom";
+import {
   // useEffect,
-  useState } from "react";
+  useState,
+} from "react";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "../ui/ThemeToggle";
 
@@ -19,6 +20,13 @@ export default function Navbar() {
   //   window.addEventListener("scroll", handleScroll);
   //   return () => window.removeEventListener("scroll", handleScroll);
   // }, []);
+  const mobileNavLinkClasses = ({ isActive }) => `
+  block w-full py-3 px-4 rounded-lg border transition
+  ${isActive 
+    ? "bg-[var(--primary)/10] border-[var(--primary)] text-[var(--primary)]" 
+    : "bg-[var(--bg-surface)] border-[var(--border-color)] text-[var(--text-primary)] hover:bg-[var(--border-color)]"}
+`;
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -53,66 +61,74 @@ export default function Navbar() {
 
           {!user && (
             <>
-              <Link
+              <NavLink
                 to="/login"
-                className="
-                relative font-medium text-(--text-primary)
-                hover:text-(--primary) transition
+                className={({ isActive }) =>
+                  `relative font-medium transition
+                ${
+                  isActive
+                    ? "text-(--primary) after:w-full"
+                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
+                }
                 after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:w-0 after:bg-(--primary)
-                after:transition-all after:duration-300
-                hover:after:w-full
-              "
+                after:bg-(--primary) after:transition-all after:duration-300`
+                }
               >
                 Login
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/signup"
-                className="
-                relative font-medium text-(--text-primary)
-                hover:text-(--primary) transition
+                className={({ isActive }) =>
+                  `relative font-medium transition
+                ${
+                  isActive
+                    ? "text-(--primary) after:w-full"
+                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
+                }
                 after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:w-0 after:bg-(--primary)
-                after:transition-all after:duration-300
-                hover:after:w-full
-              "
+                after:bg-(--primary) after:transition-all after:duration-300`
+                }
               >
                 Sign Up
-              </Link>
+              </NavLink>
             </>
           )}
 
           {user && (
             <>
-              <Link
+              <NavLink
                 to="/reports"
-                className="
-                relative font-medium text-(--text-primary)
-                hover:text-(--primary) transition
+                className={({ isActive }) =>
+                  `relative font-medium transition
+                ${
+                  isActive
+                    ? "text-(--primary) after:w-full"
+                    : "text-(--text-primary) hover:text-(--primary) after:w-0"
+                }
                 after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                after:w-0 after:bg-(--primary)
-                after:transition-all after:duration-300
-                hover:after:w-full
-              "
+                after:bg-(--primary) after:transition-all after:duration-300`
+                }
               >
                 Reports
-              </Link>
+              </NavLink>
 
               {user.admin && (
-                <Link
+                <NavLink
                   to="/admin"
-                  className="
-                  relative font-medium text-(--text-primary)
-                  hover:text-(--primary) transition
+                  className={({ isActive }) =>
+                    `relative font-medium transition
+                  ${
+                    isActive
+                      ? "text-(--primary) after:w-full"
+                      : "text-(--text-primary) hover:text-(--primary) after:w-0"
+                  }
                   after:absolute after:left-0 after:-bottom-1 after:h-0.5
-                  after:w-0 after:bg-(--primary)
-                  after:transition-all after:duration-300
-                  hover:after:w-full
-                "
+                  after:bg-(--primary) after:transition-all after:duration-300`
+                  }
                 >
                   Admin
-                </Link>
+                </NavLink>
               )}
 
               <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold cursor-pointer ">
@@ -161,62 +177,42 @@ export default function Navbar() {
         >
           {!user && (
             <div className="space-y-3">
-              <Link
+              <NavLink
                 to="/login"
                 onClick={() => setMenuOpen(false)}
-                className="block w-full text-center py-3 rounded-lg
-                           bg-(--bg-surface)
-                           text-(--text-primary)
-                           border border-(--border-color)
-                           hover:bg-(--border-color)
-                           transition"
+                className={mobileNavLinkClasses}
               >
                 Login
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/signup"
                 onClick={() => setMenuOpen(false)}
-                className="block w-full text-center py-3 rounded-lg
-                           bg-(--bg-surface)
-                           text-(--text-primary)
-                           border border-(--border-color)
-                           hover:bg-(--border-color)
-                           transition"
+                className= {mobileNavLinkClasses}
               >
                 Sign Up
-              </Link>
+              </NavLink>
             </div>
           )}
 
           {user && (
             <div className="space-y-3">
-              <Link
+              <NavLink
                 to="/reports"
                 onClick={() => setMenuOpen(false)}
-                className="block w-full py-3 px-4 rounded-lg
-                           bg-(--bg-surface)
-                           text-(--text-primary)
-                           border border-(--border-color)
-                           hover:bg-(--border-color)
-                           transition"
+                className= {mobileNavLinkClasses}
               >
                 Reports
-              </Link>
+              </NavLink>
 
               {user.admin && (
-                <Link
+                <NavLink
                   to="/admin"
                   onClick={() => setMenuOpen(false)}
-                  className="block w-full py-3 px-4 rounded-lg
-                             bg-(--bg-surface)
-                             text-(--text-primary)
-                             border border-(--border-color)
-                             hover:bg-(--border-color)
-                             transition"
+                  className={mobileNavLinkClasses}
                 >
                   Admin
-                </Link>
+                </NavLink>
               )}
 
               {/* <div className="w-9 h-9 rounded-full bg-(--primary) text-white flex items-center justify-center font-semibold">
@@ -238,3 +234,10 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// relative font-medium text-(--text-primary)
+// hover:text-(--primary) transition
+// after:absolute after:left-0 after:-bottom-1 after:h-0.5
+// after:w-0 after:bg-(--primary)
+// after:transition-all after:duration-300
+// hover:after:w-full
