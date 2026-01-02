@@ -5,7 +5,9 @@ export default function LandingPage() {
   return (
     <div className="bg-(--bg-app)">
       {/* ================= HERO ================= */}
-      <section className="min-h-[85vh] flex items-center  ">
+      <section className="min-h-[85vh] flex items-center bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.05),transparent)]
+
+ ">
         
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
@@ -99,13 +101,13 @@ export default function LandingPage() {
 
 
 {/* ================= WHY IREPORTER ================= */}
-<section className="py-24 bg-[var(--bg-surface)]/30">
+<section className="py-24 ">
   <div className="max-w-6xl mx-auto px-6 text-center">
-    <h2 className="text-3xl font-bold mb-4 text-[var(--text-primary)]">
+    <h2 className="text-3xl font-bold mb-4 text-(--text-primary)">
       Why iReporter?
     </h2>
 
-    <p className="text-[var(--text-secondary)] max-w-2xl mx-auto mb-12">
+    <p className="text-(--text-secondary) max-w-2xl mx-auto mb-12">
       iReporter bridges the gap between citizens and authorities by making reporting simple, transparent, and effective.
     </p>
 
