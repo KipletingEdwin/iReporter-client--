@@ -9,10 +9,13 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
     description: "",
     location: "",
     status: "draft",
+    image: null,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
+
+
 
   useEffect(() => {
     if (editingReport) {
@@ -25,8 +28,13 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
     }
   }, [editingReport]);
 
+
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleFileChange =(e)=>{
+    setFormData({...formData, image: e.target.files[0]})
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +51,7 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         await createReport(formData, token);
         setMessage("Report created successfully!");
       }
-      setFormData({ title: "", description: "", location: "", status: "draft" });
+      setFormData({ title: "", description: "", location: "", status: "draft", image: null });
       fetchReports();
       //onclose();
     } catch (err) {
@@ -52,6 +60,24 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
       setLoading(false);
     }
   };
+  
+  //   try {
+  //     const data = new FormData();
+  //     data.append("title", formData.title);
+  //     data.append("description", formData.description);
+  //     data.append("location", formData.location);
+  //     data.append("status", formData.status);
+  //     if (formData.image) data.append("image", formData.image);
+  
+  //     if (editingReport) {
+  //       await updateReport(editingReport.id, data, token);
+  //       setMessage("Report updated successfully!");
+  //       setEditingReport(null);
+  //     } else {
+  //       await createReport(data, token);
+  //       setMessage("Report created successfully!");
+  //     }
+  
 
   return (
     <form onSubmit={handleSubmit} className=" p-6 shadow-lg rounded-lg mb-6">
@@ -139,6 +165,17 @@ export default function ReportForm({ fetchReports, editingReport, setEditingRepo
         <option value="resolved">Resolved</option>
         <option value="rejected">Rejected</option>
       </select>
+
+      <label className="text-sm font-medium text-(--text-secondary)" >Upload Image</label>
+      <input
+      type="file"
+      accept="image/*"
+      onChange={handleFileChange}
+      className="w-full border border-(--border-color) p-3 mb-3 rounded-md bg-(--bg-surface)
+      text-(--text-secondary) 
+      file:mr-4 file:text-(--text-secondary)
+        "      
+      />
 
       <button
         type="submit"

@@ -56,9 +56,8 @@ export default function ReportsPage() {
   return (
     <div className="p-6 relative">
       <h1 className="text-2xl font-bold mb-4">Reports</h1>
-
       {error && <div className="text-red-600 mb-4">{error}</div>}
-
+      
       {/* Floating "Create Report" button (regular users only) */}
       {!user?.admin && (
         <button

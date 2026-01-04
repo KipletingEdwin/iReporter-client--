@@ -2,7 +2,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
 
 import Layout from "./components/layout/Layout";
@@ -21,10 +20,6 @@ export default function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          {/* <Route
-            path="/reports"
-            element={user ? <ReportsPage /> : <Navigate to="/login" replace />}
-          /> */}
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/admin" element={  <AdminDashboard />   }  />
         </Routes>
