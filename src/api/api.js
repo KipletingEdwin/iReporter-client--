@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";  //Local host enviroment
+//const API_URL = "http://localhost:3000";  //Local host enviroment
+const API_URL = "https://ireporter-server-mgnp.onrender.com";  //Live enviroment
+
 
 export const signup = async (data) => {
   const res = await axios.post(`${API_URL}/signup`, data);
